@@ -54,14 +54,16 @@
     <link rel="stylesheet" href="../home/css/form-widget.css">
 
 </head>
-<script>
-var siteURL = "{{env('APP_URL')}}";
-if (document.documentElement) {
-    document.documentElement.setAttribute("data-theme", "light");
-}
-</script>
 
 <body>
+    <script>
+    var siteUserRole = "{{Auth::user() ? Auth::user()->role : 'student'}}";
+    var siteURL = "{{env('APP_URL')}}";
+    if (document.documentElement) {
+        document.documentElement.setAttribute("data-theme", "light");
+    }
+    </script>
+
     <header class="header shadow shadow-sm">
         <div class="header__top" style="padding-top: 6px;padding-bottom: 6px;">
             <div class="container">

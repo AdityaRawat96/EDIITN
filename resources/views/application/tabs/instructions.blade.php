@@ -1,5 +1,5 @@
     <!--begin::Step 1-->
-    <div class="current" data-kt-stepper-element="content">
+    <div data-kt-stepper-element="content">
         <!--begin::Wrapper-->
         <div class="w-100">
             <!--begin::Heading-->

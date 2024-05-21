@@ -72,7 +72,7 @@ function handleSubmit(event) {
 
     // Check if the mobile number is verified
     $.ajax({
-        url: "/otp/register", // PHP script URL
+        url: `${siteURL}/otp/register`, // PHP script URL
         type: "POST",
         // Add lararvel crsf token to the data
         headers: {
@@ -176,7 +176,7 @@ function handleSubmit1(event) {
 
     // Check if the mobile number is verified
     $.ajax({
-        url: "/otp/login", // PHP script URL
+        url: `${siteURL}/otp/login`, // PHP script URL
         type: "POST",
         // Add lararvel crsf token to the data
         headers: {
@@ -223,7 +223,7 @@ function sendOTP() {
     formData.append("phone", mobileNumber);
 
     $.ajax({
-        url: "/otp/generate", // PHP script URL
+        url: `${siteURL}/otp/generate`, // PHP script URL
         type: "POST",
         // Add lararvel crsf token to the data
         headers: {
@@ -271,7 +271,7 @@ function authOTP() {
     formData.append("phone", mobileNumber);
 
     $.ajax({
-        url: "/otp/send", // PHP script URL
+        url: `${siteURL}/otp/send`, // PHP script URL
         type: "POST",
         // Add lararvel crsf token to the data
         headers: {
@@ -313,7 +313,7 @@ function checkOTP() {
     formData.append("phone", mobile);
 
     $.ajax({
-        url: "/otp/verify", // PHP script URL for OTP verification
+        url: `${siteURL}/otp/verify`, // PHP script URL for OTP verification
         type: "POST",
         // Add lararvel crsf token to the data
         headers: {
@@ -367,7 +367,7 @@ function verifyOTP() {
     formData.append("phone", mobile);
 
     $.ajax({
-        url: "/otp/verify", // PHP script URL for OTP verification
+        url: `${siteURL}/otp/verify`, // PHP script URL for OTP verification
         type: "POST",
         // Add lararvel crsf token to the data
         headers: {
