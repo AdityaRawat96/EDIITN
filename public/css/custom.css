@@ -1,0 +1,121 @@
+table .btn-sm {
+    width: 100px !important;
+    margin-left: auto;
+}
+
+.card-sticky {
+    position: -webkit-sticky;
+    position: sticky;
+    top: 80px;
+    z-index: 1000;
+    min-width: 300px;
+    max-width: 300px;
+}
+
+.dropzone.dropzone-queue .dropzone-item .dropzone-file {
+    flex-grow: 1;
+    flex: 1;
+    position: relative;
+    width: 100%;
+}
+
+.attachments-create
+    .dropzone.dropzone-queue
+    .dropzone-item
+    .dropzone-file
+    .dropzone-filename {
+    max-width: 160px;
+}
+
+.dropzone-start,
+.dropzone-progress {
+    display: none !important;
+}
+
+.dropzone.dropzone-queue .dropzone-item .dropzone-toolbar {
+    margin-left: 0;
+}
+
+.dropzone-local-file {
+    color: #5e6278 !important;
+}
+
+.directory_container_page
+    .attachments-create
+    .dropzone.dropzone-queue
+    .dropzone-item
+    .dropzone-file
+    .dropzone-filename {
+    max-width: unset;
+}
+
+.directory_container_page .dropzone-start,
+.directory_container_page .dropzone-progress {
+    display: inline-flex !important;
+}
+
+.fc-event-danger {
+    background-color: #f44336 !important;
+    border-color: #f44336 !important;
+    color: white !important;
+}
+.fc-event-success {
+    background-color: #4caf50 !important;
+    border-color: #4caf50 !important;
+    color: white !important;
+}
+
+.fc-daygrid-event-dot {
+    border-color: #ffffff !important;
+}
+
+.app_name_logo {
+    display: inline-block;
+    margin-left: 20px;
+    font-size: 20px;
+    margin-top: 5px;
+}
+
+@media screen and (max-width: 1400px) {
+    .card-sticky {
+        position: relative;
+        max-width: none;
+        min-width: unset;
+        top: 0;
+    }
+
+    .attachments-create
+        .dropzone.dropzone-queue
+        .dropzone-item
+        .dropzone-file
+        .dropzone-filename {
+        max-width: none;
+    }
+
+    .directory_container_page
+        .attachments-create
+        .dropzone.dropzone-queue
+        .dropzone-item
+        .dropzone-file
+        .dropzone-filename {
+        max-width: unset;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .app_name_logo {
+        display: none;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .table-toolbar {
+        flex-direction: column;
+        align-items: start;
+        gap: 10px;
+    }
+    .table-search,
+    .table-search-input {
+        width: 100% !important;
+    }
+}

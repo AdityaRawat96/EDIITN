@@ -1,0 +1,778 @@
+/* Google Fonts - Poppins */
+@import url("https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400..700;1,400..700&family=Nunito:ital,wght@0,200..1000;1,200..1000&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+
+.field input {
+    outline: none;
+    padding-top: 0;
+    padding-left: 45px;
+    padding-bottom: 0;
+    border: 1px solid #cacaca;
+    width: calc(100% - 90px); /* Adjusted width for the verify button */
+}
+.otp-input {
+    width: 60px;
+    height: 30px;
+    margin-right: 9px;
+    text-align: center;
+}
+.btn-nf {
+    background-color: #eb1b2b;
+    border: none;
+    color: #fff;
+    font-size: 14px;
+    max-width: 100%;
+    margin-top: 5px;
+    text-transform: uppercase;
+    border-radius: 0;
+    transition: 0.5s;
+    z-index: 1;
+    position: relative;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    border: 1px solid #eb1b2b;
+    border-radius: 0;
+}
+
+.lds-ring,
+.lds-ring div {
+    box-sizing: border-box;
+}
+.lds-ring {
+    display: inline-block;
+    position: relative;
+}
+.lds-ring div {
+    top: 150px;
+    box-sizing: border-box;
+    display: block;
+    position: absolute;
+    width: 34px;
+    height: 34px;
+    margin: 8px;
+    border: 8px solid currentColor;
+    border-radius: 50%;
+    animation: lds-ring 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
+    border-color: rgb(255, 55, 0) transparent transparent transparent;
+}
+.lds-ring div:nth-child(1) {
+    animation-delay: -0.45s;
+}
+.lds-ring div:nth-child(2) {
+    animation-delay: -0.3s;
+}
+.lds-ring div:nth-child(3) {
+    animation-delay: -0.15s;
+}
+@keyframes lds-ring {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+#otpFields {
+    justify-content: center;
+    margin-left: 30px;
+    margin-top: 10px;
+}
+
+#otpFields1 {
+    justify-content: center;
+    margin-left: 30px;
+    margin-top: 12px;
+    margin-bottom: 6px;
+}
+
+.field .verify-button {
+    position: absolute;
+    top: 0;
+    right: 13px;
+    padding-top: 5px;
+    padding-left: 16px;
+    height: 100%;
+    width: 90px; /* Adjusted width for the verify button */
+    border: none;
+    background-color: #ffbc2c; /* Example color */
+    color: #fff;
+    font-size: 14px;
+    cursor: pointer;
+    border-radius: 0 6px 6px 0; /* Adjusted border-radius to match the input field */
+}
+.field .greenTick {
+    position: absolute;
+    top: 0;
+    right: 15px;
+    height: 100%;
+    margin-top: 10px;
+    width: 30px;
+    border: none;
+}
+
+.applyForm__fields.signup-mode {
+    height: 200px;
+    margin-bottom: 200px;
+}
+
+.form {
+    position: relative;
+    height: 210px;
+    max-width: 390px;
+    width: 100%;
+    padding-left: 10px;
+    padding-right: 10px;
+    margin-top: -10px;
+    border-radius: 6px;
+}
+.signup {
+    display: none;
+}
+.applyForm__fields {
+    height: 440px;
+}
+#sts:focus {
+    outline: none;
+    border: none;
+}
+#state:focus {
+    outline: none;
+    border: none;
+}
+.field {
+    position: relative;
+    height: 40px;
+    width: 100%;
+    margin-top: 8px;
+    border-radius: 6px;
+}
+
+.field input,
+.field button {
+    height: 100%;
+    margin-left: 14px;
+    width: 92%; /* Adjusted width to accommodate icon */
+    border: none;
+    font-size: 13px;
+    font-weight: 400;
+    font-family: "Nunito";
+    border-radius: 6px;
+}
+.field select {
+    height: 100%;
+    margin-left: 14px;
+    width: 92%; /* Adjusted width to accommodate icon */
+    border: none;
+    font-size: 13px;
+    font-weight: 400;
+    font-family: "Nunito";
+    border-radius: 6px;
+}
+
+.field i {
+    position: absolute;
+    top: 50%;
+    margin-right: 10px;
+    left: 26px; /* Adjusted left position for icon */
+    transform: translateY(-50%);
+    color: #8b8b8b;
+}
+/* Your existing CSS */
+
+.field input {
+    outline: none;
+    padding-top: 0;
+    padding-left: 45px;
+    padding-bottom: 0;
+    border: 1px solid #cacaca;
+}
+.field select {
+    outline: none;
+    padding-top: 0;
+    padding-left: 45px;
+    padding-bottom: 0;
+    border: 1px solid #cacaca;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+    z-index: 1;
+    list-style-type: none;
+    padding: 0;
+}
+
+.dropdown-content.show {
+    display: block;
+}
+
+.dropdown-content li {
+    padding: 10px;
+    cursor: pointer;
+}
+
+.dropdown-content li:hover {
+    background-color: #ddd;
+}
+
+.eye-icon {
+    position: absolute;
+    top: 50%;
+    right: 10px;
+    transform: translateY(-50%);
+    font-size: 18px;
+    color: #8b8b8b;
+    cursor: pointer;
+    padding: 5px;
+}
+.field button {
+    color: #fff;
+    background-color: #f56e00;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+.field button:hover {
+    color: #fff !important;
+    background-color: #e46702 !important;
+}
+.form-link {
+    text-align: center;
+    margin-top: 10px;
+}
+.form-link span,
+.form-link a {
+    font-size: 14px;
+    font-weight: 400;
+    color: #232836;
+}
+.form a {
+    color: #0171d3;
+    text-decoration: none;
+}
+.form-content a:hover {
+    text-decoration: underline;
+}
+.form-content {
+    margin-top: 10px;
+}
+.line {
+    position: relative;
+    height: 1px;
+    width: 100%;
+    margin: 36px 0;
+    background-color: #d4d4d4;
+}
+.line::before {
+    content: "Or";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #fff;
+    color: #8b8b8b;
+    padding: 0 15px;
+}
+.media-options a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+a.facebook {
+    color: #fff;
+    background-color: #4267b2;
+}
+a.facebook .facebook-icon {
+    height: 28px;
+    width: 28px;
+    color: #0171d3;
+    font-size: 20px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #fff;
+}
+.facebook-icon,
+img.google-img {
+    position: absolute;
+    top: 50%;
+    left: 15px;
+    transform: translateY(-50%);
+}
+img.google-img {
+    height: 20px;
+    width: 20px;
+    object-fit: cover;
+}
+a.google {
+    border: 1px solid #cacaca;
+}
+a.google span {
+    font-weight: 500;
+    opacity: 0.6;
+    color: #232836;
+}
+
+@media screen and (max-width: 400px) {
+    .form {
+        padding: 20px 10px;
+    }
+}
+.admission-banner .col-lg-6:nth-child(1) {
+    background: var(--faded-blue);
+}
+
+.admission-banner .col-lg-6:nth-child(1):before {
+    content: "";
+    background: var(--faded-blue);
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 100%;
+    width: 9999px;
+}
+
+.admission-banner__content {
+    max-width: 430px;
+}
+
+.admission-banner {
+    margin-top: -50px;
+}
+.admission-banner__content h1,
+.admission-banner__content h2 {
+    font-size: 36px;
+    line-height: 36px;
+    font-weight: bold;
+    margin-bottom: 15px;
+}
+
+.admission-banner__content p {
+    font-size: 18px;
+    line-height: 24px;
+}
+
+.admission-banner__notification {
+    position: absolute;
+    bottom: 60px;
+    right: 15px;
+    left: 15px;
+    z-index: 1;
+}
+
+.admission-banner__notification::before {
+    content: "";
+    background: #efefef;
+    position: absolute;
+    bottom: -60px;
+    right: -15px;
+    width: 9999px;
+    height: 130px;
+}
+
+.admission-banner__notification h3 {
+    font-size: 24px;
+    font-weight: bold;
+    line-height: 28px;
+    color: var(--text-white);
+}
+
+.admission-banner__notification p {
+    font-size: 16px;
+    margin-top: 20px;
+}
+
+.adn-item {
+    padding-right: 10px;
+}
+
+.adn-item .card {
+    background: var(--bg-green);
+    color: var(--text-white);
+    border-radius: 15px;
+    -webkit-border-radius: 15px;
+    -moz-border-radius: 15px;
+    -ms-border-radius: 15px;
+    -o-border-radius: 15px;
+    border: 0;
+}
+
+.adn-item .card h5 {
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.adn-item .card li {
+    font-size: 14px;
+}
+
+.adn-item .card a {
+    color: var(--text-white);
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.admissionForm .applyForm {
+    border-radius: 5px;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    -ms-border-radius: 5px;
+    -o-border-radius: 5px;
+}
+
+.admissionForm .applyForm__header {
+    border-radius: 10px 10px 0 0;
+    -webkit-border-radius: 20px 20px 0 0;
+    -moz-border-radius: 20px 20px 0 0;
+    -ms-border-radius: 20px 20px 0 0;
+    -o-border-radius: 20px 20px 0 0;
+}
+
+.admissionPrograms-section__slider {
+    padding-left: 5%;
+}
+
+.aps-item {
+    margin-right: 20px;
+    padding-bottom: 40px;
+}
+
+.aps-item .card {
+    background: var(--bg-gray);
+    border-color: #ddd;
+}
+
+.aps-item .card h4 {
+    font-weight: bold;
+    font-size: 22px;
+    line-height: 24px;
+    margin-bottom: 15px;
+}
+
+.aps-item .card ul li {
+    margin-bottom: 10px;
+    position: relative;
+    padding-right: 24px;
+}
+
+.aps-item .card ul li::after {
+    content: "\f105";
+    font-family: FontAwesome;
+    position: absolute;
+    right: 0;
+    top: 0;
+    font-size: 20px;
+}
+
+.aps-item .card ul li:last-child {
+    margin-bottom: 0;
+}
+
+.aps-item .card ul li a {
+    color: var(--text-dark);
+    text-decoration: none;
+    display: block;
+    position: relative;
+    font-size: 14px;
+}
+
+.aps-item .card ul li a::after {
+    content: "";
+    width: 0;
+    height: 2px;
+    background-color: var(--bg-dark-gray);
+    position: absolute;
+    bottom: -3px;
+    left: 0;
+    transition: ease-in-out 0.2s;
+}
+
+.aps-item .card ul li a:hover::after {
+    width: 100%;
+}
+
+.aps-item .card .card-footer {
+    margin-bottom: -45px;
+}
+
+.aps-item.slick-slide {
+    opacity: 0.2;
+}
+
+.aps-item.slick-slide.slick-active {
+    opacity: 1;
+}
+
+.as-img {
+    position: relative;
+    height: 400px;
+}
+
+.as-img::after {
+    content: "";
+    background: rgba(0, 0, 0, 0.5);
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+}
+
+.admissionScholarship-section__content {
+    background: var(--bg-green);
+}
+
+.admissionScholarship-section__content .page-heading {
+    margin-top: -238px;
+    position: relative;
+}
+
+.as-nav__item {
+    background: var(--bg-white);
+    border-radius: 20px;
+    -webkit-border-radius: 20px;
+    -moz-border-radius: 20px;
+    -ms-border-radius: 20px;
+    -o-border-radius: 20px;
+    height: 85px;
+    text-align: center;
+    margin: 0 10px;
+    font-size: 18px;
+    cursor: pointer;
+}
+
+.as-nav__item p {
+    margin: 0;
+    width: 100%;
+    font-family: var(--primary-sub-font);
+}
+
+.admissionScholarship__slider .slick-current p {
+    color: var(--text-white);
+}
+
+.as-details {
+    margin: auto;
+    max-width: 850px;
+}
+
+.as-nav__item.slick-slide.slick-current.slick-active {
+    background: var(--bg-green);
+    color: var(--text-white);
+}
+
+.admissionPlacement-no {
+    background: var(--bg-blue);
+}
+
+.adm-outer {
+    padding: 0 100px;
+    margin-top: 60px;
+}
+
+.admissionPlacement-no__content h3 {
+    font-size: 64px;
+    font-weight: bold;
+}
+/* education loan page */
+
+.educationLoan-section .card {
+    border-radius: 0;
+    -webkit-border-radius: 0;
+    -moz-border-radius: 0;
+    -ms-border-radius: 0;
+    -o-border-radius: 0;
+    transition: ease-in-out 0.4s;
+    -webkit-transition: ease-in-out 0.4s;
+    -moz-transition: ease-in-out 0.4s;
+    -ms-transition: ease-in-out 0.4s;
+    -o-transition: ease-in-out 0.4s;
+}
+
+.educationLoan-section .row .col-md-6:nth-child(1) .card {
+    border-top: 0;
+    border-bottom: 0;
+    border-left: 0;
+}
+
+.educationLoan-section .row .col-md-6:nth-child(2) .card {
+    border: 0;
+}
+
+.educationLoan-section .row .col-md-6:nth-child(3) .card {
+    border-left: 0;
+    border-bottom: 0;
+}
+
+.educationLoan-section .row .col-md-6:nth-child(4) .card {
+    border-right: 0;
+    border-bottom: 0;
+    border-left: 0;
+}
+
+.educationLoan-section .row .col-md-6.active .card {
+    background: var(--bg-green);
+    color: var(--text-white);
+}
+
+.educationLoan-section .row .col-md-6.active .card h5,
+.educationLoan-section .row .col-md-6.active .card a {
+    color: var(--text-white);
+}
+
+.educationLoan-section .row .col-md-6.active .card a {
+    border-color: var(--bg-white);
+}
+
+.educationLoan-section .card .card-body {
+    padding: 30px 30px 0 30px;
+}
+
+.educationLoan-section .card .card-body h5 {
+    font-family: var(--primary-sub-font);
+    margin-bottom: 10px;
+    color: var(--text-blue);
+}
+
+.educationLoan-section .card .card-footer {
+    padding: 0 30px 30px 30px;
+}
+
+.banks-section {
+    background: var(--bg-gray);
+}
+
+.bankDetails ul li a {
+    text-decoration: none;
+    color: var(--text-blue);
+}
+/* education loan page */
+
+.helpAcco .accordion-item.active .accordion-collapse {
+    display: block;
+}
+
+.helpAcco .accordion-item button {
+    font-weight: normal;
+}
+
+.helpAcco .accordion-item.active button {
+    font-weight: bold;
+}
+.accordion-button::after {
+    background-image: var(--bs-accordion-btn-active-icon);
+    transform: none;
+}
+.helpAcco .accordion-item.active .accordion-button::after {
+    background-image: var(--bs-accordion-btn-active-icon);
+    transform: rotate(180deg);
+    -webkit-transform: rotate(180deg);
+    -moz-transform: rotate(180deg);
+    -ms-transform: rotate(180deg);
+    -o-transform: rotate(180deg);
+}
+
+@media only screen and (max-width: 1399px) {
+    .admission-banner__notification {
+        padding-right: 0 !important;
+    }
+}
+
+@media only screen and (max-width: 1199px) {
+    .admission-banner__notification {
+        position: static;
+        margin-top: 40px;
+    }
+    .admission-banner__notification p {
+        color: var(--text-white);
+    }
+    .admission-banner__notification h3 {
+        font-size: 24px;
+        line-height: 24px;
+    }
+    .admission-banner__notification p {
+        margin-top: 5px;
+    }
+    .admission-banner__notification::before {
+        display: none;
+    }
+    .adm-outer {
+        padding: 0px;
+    }
+    .as-img {
+        height: 300px;
+    }
+}
+
+@media only screen and (max-width: 991px) {
+    .admission-banner {
+        margin-top: 0px;
+    }
+    .admission-banner .col-lg-6:nth-child(1)::after {
+        content: "";
+        background: var(--faded-blue);
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 100%;
+        width: 9999px;
+    }
+    .admission-banner__notification {
+        margin-bottom: 50px;
+    }
+    .admissionForm .applyForm {
+        margin: auto !important;
+    }
+    .as-details .as-details__item {
+        padding: 0 50px;
+    }
+}
+
+@media only screen and (max-width: 575px) {
+    .admission-banner {
+        text-align: center;
+    }
+    .applyForm__fields.p-4 {
+        text-align: left;
+    }
+    .admissionPrograms-section__slider {
+        padding-left: 0;
+    }
+    .admissionScholarship-section__content .page-heading {
+        margin-top: -240px;
+    }
+    .as-nav__item {
+        margin: 0 2px;
+    }
+    .as-nav__item p {
+        font-size: 14px;
+        line-height: 16px;
+        padding: 5px;
+        word-wrap: break-word;
+    }
+    .admission-banner__content h1,
+    .admission-banner__content h2 {
+        font-size: 30px;
+        line-height: 31px;
+    }
+    .aps-item .card .card-footer a i {
+        display: none;
+    }
+    .as-details .as-details__item {
+        padding: 0 20px;
+    }
+    .adm-outer {
+        margin-top: 30px;
+    }
+    .admissionPlacement-no__content h3 {
+        font-size: 44px;
+    }
+    .educationLoan-section .card {
+        border: 1px solid #ddd !important;
+    }
+    .educationLoan-section .row .col-md-6 {
+        margin-bottom: 10px;
+    }
+}

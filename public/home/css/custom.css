@@ -1,0 +1,294 @@
+html,
+body {
+    overflow-x: hidden;
+}
+
+#left {
+    display: none !important;
+}
+
+.keyfeatures .card {
+    background: rgba(94, 0, 9, 0.95);
+    font-size: 14px;
+    color: #fff;
+}
+
+div#ee-form-8-modal-swapper {
+    padding-top: 0px;
+}
+
+button#ee-form-8-form-8-submit {
+    color: #fff !important;
+    background: #1762ae !important;
+    border: 1px solid #1762ae !important;
+}
+
+button#ee-form-8-form-8-login {
+    background: #1762ae !important;
+    border: 1px solid #1762ae !important;
+    color: #fff !important;
+}
+
+.bigInfo-section__content .fa {
+    color: #61b239 !important;
+}
+
+.bigInfo-section__content h5 {
+    margin-bottom: 10px;
+}
+
+.sFeaturesBox {
+    border: 0px solid #ddd;
+    padding: 15px 15px;
+    min-height: 245px;
+    margin-bottom: 14px;
+    border-radius: 10px;
+    background: #eee;
+}
+
+.sFeaturesBox h5 {
+    margin-bottom: 15px;
+}
+
+.emab_wid {
+    background: #fff;
+    border-radius: 7px;
+}
+
+div#ee-form-8-modal-swapper {
+    max-width: 100%;
+}
+
+.sFeaturesBox .fa {
+    color: #368c0b;
+}
+
+.st-images {
+    width: 267px !important;
+}
+
+.shadow {
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15) !important;
+}
+
+.SpBox {
+    margin-bottom: 25px;
+}
+
+.SpBox img {
+    border-radius: 10px;
+    width: 100%;
+}
+
+.ee-form-widget {
+    padding-bottom: 10px !important;
+}
+
+.uuRankings {
+    background: url("newassets/images/uu-infra.html") !important;
+    background-size: cover !important;
+    background-repeat: no-repeat !important;
+    background-attachment: fixed;
+    background-position: center center;
+    padding-top: 40px;
+    padding-bottom: 40px;
+}
+
+.uuRankings .slide h4 {
+    font-size: 17px;
+    padding: 12px 5px 5px 10px;
+    color: #000;
+    font-weight: bold;
+}
+
+.uuRankings .slide h5 {
+    font-size: 15px;
+    padding: 0px 5px 5px 10px;
+}
+
+.uuRankings .slide {
+    border-radius: 9px;
+    background-color: #fff !important;
+    border: 0px solid #ccc;
+    margin-left: 5px;
+    margin-right: 5px;
+}
+
+.uuRankings .slick-arrow {
+    position: absolute;
+    bottom: -2px;
+    border: 1px solid var(--text-green);
+    width: 20px;
+    height: 20px;
+    line-height: 18px;
+    text-align: center;
+    border-radius: 50%;
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    -ms-border-radius: 50%;
+    -o-border-radius: 50%;
+    cursor: pointer;
+    color: var(--text-green);
+    z-index: 1;
+}
+
+.check-box-field {
+    display: none !important;
+}
+
+/* Set display to none for image*/
+#image {
+    display: none;
+}
+
+@media print {
+    #printableArea {
+        display: block;
+    }
+}
+
+#left {
+    border-color: #0a58ca;
+    width: 300px;
+    border-radius: 4px;
+    bottom: 60px !important;
+}
+
+#left .handle {
+    background-color: #0a58ca;
+}
+
+/*
+tabSlideOUt
+
+By  Michael Fielding
+License: GPL v3.0
+*/
+
+.ui-slideouttab-panel,
+.ui-slideouttab-handle {
+    background-color: white;
+    padding: 0.4em;
+    box-sizing: border-box;
+}
+
+.ui-slideouttab-panel {
+    display: block;
+    position: fixed;
+    border: 2px solid grey;
+}
+
+/* This class is added after the tabs are initialised, otherwise the user sees the 
+tabs slide out of the way when the page is initialised. */
+.ui-slideouttab-ready {
+    transition: transform 0.5s ease 0s;
+}
+
+/* Hide tabs and panels when printed. */
+@media print {
+    .ui-slideouttab-panel {
+        display: none;
+    }
+}
+
+/* Tab handles */
+.ui-slideouttab-handle {
+    display: block;
+    position: absolute;
+    cursor: pointer;
+    color: white;
+    background-color: grey;
+}
+
+.ui-slideouttab-handle-image {
+    transform: rotate(0);
+}
+
+/* Right */
+.ui-slideouttab-right {
+    right: 0px;
+    transform: translateX(100%);
+    border-right: none;
+}
+
+.ui-slideouttab-right.ui-slideouttab-open {
+    transform: translateX(0%);
+}
+
+.ui-slideouttab-right .ui-slideouttab-handle {
+    transform-origin: 0% 0%;
+    transform: rotate(-90deg) translate(-100%, -100%);
+}
+
+.ui-slideouttab-right .ui-slideouttab-handle-reverse {
+    transform-origin: 0% 100%;
+    transform: rotate(-90deg);
+}
+
+/* Left */
+.ui-slideouttab-left {
+    left: 0px;
+    transform: translateX(-100%);
+    border-left: none;
+}
+
+.ui-slideouttab-left.ui-slideouttab-open {
+    transform: translateX(0%);
+}
+
+.ui-slideouttab-left .ui-slideouttab-handle {
+    transform-origin: 100% 0%;
+    transform: rotate(-90deg);
+}
+
+.ui-slideouttab-left .ui-slideouttab-handle-reverse {
+    transform-origin: 100% 100%;
+    transform: rotate(-90deg) translate(100%, 100%);
+}
+
+/* Top */
+.ui-slideouttab-top {
+    top: 0px;
+    transform: translateY(-100%);
+    border-top: none;
+}
+
+.ui-slideouttab-top.ui-slideouttab-open {
+    transform: translateY(0%);
+}
+
+/* Bottom */
+.ui-slideouttab-bottom {
+    bottom: 0px;
+    transform: translateY(100%);
+    border-bottom: none;
+}
+
+.ui-slideouttab-bottom.ui-slideouttab-open {
+    transform: translateY(0%);
+}
+
+/* turn font awesome icon in a tab upright */
+.ui-slideouttab-left .ui-slideouttab-handle > .fa-icon,
+.ui-slideouttab-right .ui-slideouttab-handle > .fa-icon {
+    transform: rotate(90deg);
+}
+
+.ui-slideouttab-handle > .fa-icon {
+    margin-left: 0.5em;
+}
+
+/* apply rounded corners if handle has the -rounded class */
+.ui-slideouttab-top .ui-slideouttab-handle-rounded,
+.ui-slideouttab-left .ui-slideouttab-handle-rounded {
+    border-radius: 0 0 4px 4px;
+}
+
+.ui-slideouttab-right .ui-slideouttab-handle-rounded,
+.ui-slideouttab-bottom .ui-slideouttab-handle-rounded {
+    border-radius: 4px 4px 0 0;
+}
+
+.slick-slide {
+    height: auto;
+}
