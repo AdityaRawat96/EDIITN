@@ -25,7 +25,8 @@ class StoreNotificationRequest extends FormRequest
     public function rules()
     {
         return [
-            'date' => ['required', 'date'],
+            'date' => ['nullable', 'date'],
+            'user_id' => ['required', 'exists:users,id'], // 'exists' rule checks if the user_id exists in the 'users' table 'id' column
             'title' => ['required', 'string'],
             'description' => ['required', 'string', 'max:2000'],
             'file' => ['array', 'max:10'],

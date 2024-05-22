@@ -9,13 +9,6 @@ var KTNotificationSettings = (function () {
                 (t = r.querySelector("#kt_form_submit")),
                 (n = FormValidation.formValidation(r, {
                     fields: {
-                        date: {
-                            validators: {
-                                notEmpty: {
-                                    message: "This field is required",
-                                },
-                            },
-                        },
                         title: {
                             validators: {
                                 notEmpty: {
@@ -50,119 +43,102 @@ var KTNotificationSettings = (function () {
                     },
                 })),
                 $(document).ready(function (e) {
-                    $("#notification_date").flatpickr({
-                        enableTime: false,
-                        dateFormat: "d-m-Y",
-                    });
-                    $(".reset").on("click", function (e) {
-                        window.history.length > 2
-                            ? window.history.back()
-                            : (window.location.href = `${siteURL}/${siteUserRole}/notification`);
-                    }),
-                        $("#kt_create_form").on("submit", function (e) {
-                            e.preventDefault();
-                            t.setAttribute("data-kt-indicator", "on");
-                            t.disabled = !0;
-                            var formData = new FormData(this);
-                            if ($("#kt_create_form").attr("method") == "PUT") {
-                                formData.append("_method", "PUT");
-                            }
+                    $("#kt_create_form").on("submit", function (e) {
+                        e.preventDefault();
+                        t.setAttribute("data-kt-indicator", "on");
+                        t.disabled = !0;
+                        var formData = new FormData(this);
+                        if ($("#kt_create_form").attr("method") == "PUT") {
+                            formData.append("_method", "PUT");
+                        }
 
-                            // convert date field from Y-m-d H:i to mysql format using moment
-                            var notification_date = formData.get("date");
-                            const inputFormat = "DD-MM-YYYY"; // Input date format
-                            const outputFormat = "YYYY-MM-DD"; // Desired output date format
-                            const outputDateString = moment(
-                                notification_date,
-                                inputFormat
-                            ).format(outputFormat);
+                        if (user_id) {
+                            formData.append("user_id", user_id);
+                        }
 
-                            formData.set("date", outputDateString);
-                            // Append dropzone files to formData
-                            if (myDropzone) {
-                                myDropzone.files.forEach(function (file) {
-                                    formData.append("file[]", file);
-                                });
-                            }
-
-                            $.ajax({
-                                url: $("#kt_create_form").attr("action"),
-                                type: "POST",
-                                data: formData,
-                                processData: false,
-                                contentType: false,
-                                cache: false,
-                                enctype: "multipart/form-data",
-                                success: function (result) {
-                                    (t.disabled = !1),
-                                        console.log(result),
-                                        t.removeAttribute("data-kt-indicator"),
-                                        Swal.fire({
-                                            text: result.message,
-                                            icon: "success",
-                                            buttonsStyling: !1,
-                                            confirmButtonText: "Ok, got it!",
-                                            customClass: {
-                                                confirmButton:
-                                                    "btn btn-primary",
-                                            },
-                                        }).then(function (e) {
-                                            e.isConfirmed &&
-                                                window.location.reload();
-                                        });
-                                },
-                                error: function (err) {
-                                    t.disabled = !1;
-                                    t.removeAttribute("data-kt-indicator");
-                                    if (err.status == 422) {
-                                        console.log(err.responseJSON);
-                                        // display errors on each form field
-                                        $.each(
-                                            err.responseJSON.errors,
-                                            function (i, error) {
-                                                var el = $(
-                                                    "#kt_create_form [name='" +
-                                                        i +
-                                                        "']"
-                                                );
-                                                el.closest(".fv-row")
-                                                    .find(
-                                                        ".fv-plugins-message-container"
-                                                    )
-                                                    .text(error[0]);
-                                                el.addClass("is-invalid");
-
-                                                // scroll to the error message
-                                                KTUtil.scrollTop();
-
-                                                Swal.fire({
-                                                    text: "Sorry, looks like there are some errors detected, please try again.",
-                                                    icon: "error",
-                                                    buttonsStyling: !1,
-                                                    confirmButtonText:
-                                                        "Ok, got it!",
-                                                    customClass: {
-                                                        confirmButton:
-                                                            "btn btn-primary",
-                                                    },
-                                                });
-                                            }
-                                        );
-                                    } else {
-                                        Swal.fire({
-                                            text: "Sorry, looks like there are some errors detected, please try again.",
-                                            icon: "error",
-                                            buttonsStyling: !1,
-                                            confirmButtonText: "Ok, got it!",
-                                            customClass: {
-                                                confirmButton:
-                                                    "btn btn-primary",
-                                            },
-                                        });
-                                    }
-                                },
+                        // Append dropzone files to formData
+                        if (myDropzone) {
+                            myDropzone.files.forEach(function (file) {
+                                formData.append("file[]", file);
                             });
+                        }
+
+                        $.ajax({
+                            url: $("#kt_create_form").attr("action"),
+                            type: "POST",
+                            data: formData,
+                            processData: false,
+                            contentType: false,
+                            cache: false,
+                            enctype: "multipart/form-data",
+                            success: function (result) {
+                                (t.disabled = !1),
+                                    console.log(result),
+                                    t.removeAttribute("data-kt-indicator"),
+                                    Swal.fire({
+                                        text: result.message,
+                                        icon: "success",
+                                        buttonsStyling: !1,
+                                        confirmButtonText: "Ok, got it!",
+                                        customClass: {
+                                            confirmButton: "btn btn-primary",
+                                        },
+                                    }).then(function (e) {
+                                        e.isConfirmed &&
+                                            window.location.reload();
+                                    });
+                            },
+                            error: function (err) {
+                                t.disabled = !1;
+                                t.removeAttribute("data-kt-indicator");
+                                if (err.status == 422) {
+                                    console.log(err.responseJSON);
+                                    // display errors on each form field
+                                    $.each(
+                                        err.responseJSON.errors,
+                                        function (i, error) {
+                                            var el = $(
+                                                "#kt_create_form [name='" +
+                                                    i +
+                                                    "']"
+                                            );
+                                            el.closest(".fv-row")
+                                                .find(
+                                                    ".fv-plugins-message-container"
+                                                )
+                                                .text(error[0]);
+                                            el.addClass("is-invalid");
+
+                                            // scroll to the error message
+                                            KTUtil.scrollTop();
+
+                                            Swal.fire({
+                                                text: "Sorry, looks like there are some errors detected, please try again.",
+                                                icon: "error",
+                                                buttonsStyling: !1,
+                                                confirmButtonText:
+                                                    "Ok, got it!",
+                                                customClass: {
+                                                    confirmButton:
+                                                        "btn btn-primary",
+                                                },
+                                            });
+                                        }
+                                    );
+                                } else {
+                                    Swal.fire({
+                                        text: "Sorry, looks like there are some errors detected, please try again.",
+                                        icon: "error",
+                                        buttonsStyling: !1,
+                                        confirmButtonText: "Ok, got it!",
+                                        customClass: {
+                                            confirmButton: "btn btn-primary",
+                                        },
+                                    });
+                                }
+                            },
                         });
+                    });
                 }),
                 t.addEventListener("click", async function (e) {
                     e.preventDefault(),

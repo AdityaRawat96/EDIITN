@@ -11,6 +11,7 @@ use App\Models\Customer;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Maatwebsite\Excel\Facades\Excel;
 use Yajra\DataTables\DataTables;
 
@@ -95,6 +96,22 @@ class NotificationController extends Controller
     }
 
     /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function timeline(Request $request)
+    {
+        $user = Auth::user();
+        $notifications = Notification::where('user_id', $user->id)->get();
+        // Get attachments for each notification
+        foreach ($notifications as $notification) {
+            $notification->attachments = Attachment::where('type', 'notification')->where('ref_id', $notification->id)->get();
+        }
+        return view('notification.timeline', compact('notifications'));
+    }
+
+    /**
      * Show the form for creating a new resource.
      *
      * @return \Illuminate\Http\Response
@@ -120,7 +137,6 @@ class NotificationController extends Controller
         $validated = $request->validated();
         try {
             DB::beginTransaction();
-            $validated['user_id'] = auth()->user()->id;
             // Store the notification in the database
             $notification = Notification::create($validated);
 

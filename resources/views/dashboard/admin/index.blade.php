@@ -58,7 +58,7 @@
                                 <div class="d-flex align-items-center mb-2">
                                     <!--begin::Title-->
                                     <span class="fs-2hx fw-bold text-gray-800 me-2 lh-1 ls-n2">
-                                        £ {{ number_format($totalRevenue) }}
+                                        {{ $total_applications }}
                                     </span>
                                     <!--end::Title-->
                                 </div>
@@ -120,14 +120,14 @@
                                 <div class="d-flex align-items-center mb-2">
                                     <!--begin::Title-->
                                     <span class="fs-2hx fw-bold text-gray-800 me-2 lh-1 ls-n2">
-                                        Total: {{ number_format($INVOICE_DATA['invoiceTotalSum']) }}
+                                        Total: {{$total_applications}}
                                     </span>
                                     <!--end::Title-->
                                 </div>
                                 <!--end::Heading-->
                                 <!--begin::Description-->
                                 <span class="fs-6 fw-semibold text-gray-400">
-                                    Invoice created over past 2 weeks
+                                    Monthly applications created
                                 </span>
                                 <!--end::Description-->
                             </div>
@@ -137,7 +137,7 @@
                         <!--begin::Body-->
                         <div class="card-body d-flex align-items-end p-0">
                             <!--begin::Chart-->
-                            <div id="invoice_chart" class="h-300px w-100 min-h-auto ps-7 pe-0 mb-5"></div>
+                            <div id="application_chart" class="h-300px w-100 min-h-auto ps-7 pe-0 mb-5"></div>
                             <!--end::Chart-->
                         </div>
                         <!--end::Body-->
@@ -169,9 +169,8 @@
 
 @section('pagespecificscripts')
 <script>
-    var REVENUE_DATA = @json($REVENUE_DATA);
-    var SALES_DATA = @json($SALES_DATA);
-    var INVOICE_DATA = @json($INVOICE_DATA);
+var STATUS_DATA = @json($STATUS_DATA);
+var APPLICATION_DATA = @json($APPLICATION_DATA);
 </script>
 <!--begin::Vendors Javascript(used for this page only)-->
 <script src="https://cdn.amcharts.com/lib/5/index.js"></script>

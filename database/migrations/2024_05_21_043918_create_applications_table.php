@@ -17,14 +17,14 @@ class CreateApplicationsTable extends Migration  // Rename this class to a suita
             $table->string('caste', 50)->nullable();
             $table->string('religion', 50)->nullable();
             $table->string('nationality', 50)->nullable();
-            $table->string('program', 30)->nullable();
-            $table->string('field', 200); // Not nullable
+            $table->string('program', 200)->nullable();
+            $table->string('field', 200)->nullable();
             $table->string('differently_abled', 10)->nullable();
             $table->string('marital_status', 20)->nullable();
             $table->string('fathers_name', 100)->nullable();
             $table->string('father_occupation', 100)->nullable();
             $table->string('fathers_annual_income', 50)->nullable();
-            $table->string('fathers_mobile', 15)->nullable();
+            $table->string('fathers_mobile_number', 15)->nullable();
             $table->string('mothers_name', 100)->nullable();
             $table->string('mother_occupation', 100)->nullable();
             $table->string('mothers_annual_income', 30)->nullable();
@@ -45,7 +45,7 @@ class CreateApplicationsTable extends Migration  // Rename this class to a suita
             $table->string('university', 255)->nullable();
             $table->string('degree_name', 255)->nullable();
             $table->integer('graduation_year')->nullable();
-            $table->string('percentage_grade', 10)->nullable();
+            $table->string('percentage_grade', 100)->nullable();
             $table->timestamps(); // Created_at and updated_at timestamps
         });
     }

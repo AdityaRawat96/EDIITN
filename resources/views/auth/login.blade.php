@@ -10,8 +10,7 @@
             <!--begin::Wrapper-->
             <div class="w-lg-500px p-10">
                 <!--begin::Form-->
-                <form class="form w-100" novalidate="novalidate" id="kt_sign_in_form" action="{{ route('login') }}"
-                    method="POST">
+                <form class="form w-100" novalidate="novalidate" id="kt_sign_in_form" action="{{ route('login') }}" method="POST">
                     @csrf
                     <!--begin::Heading-->
                     <div class="text-center mb-11">
@@ -23,8 +22,7 @@
                     <!--begin::Input group=-->
                     <div class="fv-row mb-8">
                         <!--begin::Email-->
-                        <input type="email" placeholder="Email / Username" name="email" autocomplete="email"
-                            class="form-control bg-transparent" value="{{ old('email') }}" />
+                        <input type="email" placeholder="Email / Username" name="email" autocomplete="email" class="form-control bg-transparent" value="{{ old('email') }}" />
                         @if ($errors->has('username') || $errors->has('email'))
                         <div class="fv-plugins-message-container invalid-feedback invalid-feedback-email">
                             <div data-field="email" data-validator="regexp">
@@ -37,8 +35,7 @@
                     <!--end::Input group=-->
                     <div class="fv-row mb-8">
                         <!--begin::Password-->
-                        <input type="password" placeholder="Password" name="password" autocomplete="off"
-                            class="form-control bg-transparent" />
+                        <input type="password" placeholder="Password" name="password" autocomplete="off" class="form-control bg-transparent" />
                         @error('password')
                         <div class="fv-plugins-message-container invalid-feedback invalid-feedback-password">
                             <div data-field="password" data-validator="regexp">{{ $message }}</div>
@@ -86,13 +83,12 @@
     </div>
     <!--end::Body-->
     <!--begin::Aside-->
-    <div class="d-flex flex-lg-row-fluid w-lg-50 bgi-size-cover bgi-position-center order-1 order-lg-2"
-        style="background-image: url(media/misc/auth-bg.png)">
+    <div class="d-flex flex-lg-row-fluid w-lg-50 bgi-size-cover bgi-position-center order-1 order-lg-2" style="background-image: url(media/misc/auth-bg.png)">
         <!--begin::Content-->
         <div class="d-flex flex-column flex-center py-7 py-lg-15 px-5 px-md-15 w-100">
             <!--begin::Logo-->
             <a href="/" class="mb-15">
-                <img alt="Logo" src="{{asset('media/logos/logo.png')}}" class="h-80px h-lg-350px" />
+                <img alt="Logo" src="{{asset('media/logos/logo_1.png')}}" class="h-80px w-lg-450px" />
             </a>
             <!--end::Logo-->
         </div>

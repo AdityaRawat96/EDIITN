@@ -109,6 +109,7 @@ s_a[35] =
     " Adra | Alipurduar | Amlagora | Arambagh | Asansol | Balurghat | Bankura | Bardhaman | Basirhat | Berhampur | Bethuadahari | Birbhum | Birpara | Bishanpur | Bolpur | Bongoan | Bulbulchandi | Burdwan | Calcutta | Canning | Champadanga | Contai | Cooch Behar | Daimond Harbour | Dalkhola | Dantan | Darjeeling | Dhaniakhali | Dhuliyan | Dinajpur | Dinhata | Durgapur | Gangajalghati | Gangarampur | Ghatal | Guskara | Habra | Haldia | Harirampur | Harishchandrapur | Hooghly | Howrah | Islampur | Jagatballavpur | Jalpaiguri | Jhalda | Jhargram | Kakdwip | Kalchini | Kalimpong | Kalna | Kandi | Karimpur | Katwa | Kharagpur | Khatra | Krishnanagar | Mal Bazar | Malda | Manbazar | Mathabhanga | Medinipur | Mekhliganj | Mirzapur | Murshidabad | Nadia | Nagarakata | Nalhati | Nayagarh | Parganas | Purulia | Raiganj | Rampur Hat | Ranaghat | Seharabazar | Siliguri | Suri | Takipur | Tamluk";
 
 function print_state(option_str) {
+    let index = 0;
     option_str.length = 0;
     option_str.options = [];
     option_str.options[0] = new Option("Select State", "");
@@ -122,7 +123,10 @@ function print_state(option_str) {
     // check if data-value attribute is set
     if (option_str.getAttribute("data-value")) {
         option_str.value = option_str.getAttribute("data-value");
+        index = state_arr.indexOf(option_str.getAttribute("data-value"));
     }
+
+    return index;
 }
 
 function print_city(option_str, city_index) {
@@ -133,47 +137,47 @@ function print_city(option_str, city_index) {
     var city_arr = s_a[city_index].split("|");
     for (var i = 0; i < city_arr.length; i++) {
         option_str.options[option_str.length] = new Option(
-            city_arr[i],
-            city_arr[i]
+            city_arr[i].trim(),
+            city_arr[i].trim()
         );
     }
 
     // check if data-value attribute is set
     if (option_str.getAttribute("data-value")) {
-        console.log("data-value", option_str.getAttribute("data-value"));
-        option_str.value = option_str.getAttribute("data-value");
+        let selectedCity = option_str.getAttribute("data-value");
+        for (var i = 0; i < option_str.options.length; i++) {
+            if (option_str.options[i].value == selectedCity) {
+                option_str.value = selectedCity;
+                break;
+            }
+        }
     }
 }
 
 $(document).ready(function () {
-    let states_list = document.getElementsByClassName("state_inputs");
-    let cities_list = document.getElementsByClassName("city_inputs");
+    let states_list = document.querySelectorAll("select.state_inputs");
+    let cities_list = document.querySelectorAll("select.city_inputs");
 
     for (let i = 0; i < states_list.length; i++) {
-        print_state(states_list[i]);
+        let selectedStateIndex = print_state(states_list[i]);
+        print_city(cities_list[i], selectedStateIndex);
     }
 
-    for (let i = 0; i < cities_list.length; i++) {
-        // check if data-value attribute is set
-        if (states_list[i].getAttribute("data-value")) {
-            // get the index of the selected state
-            let state_index = state_arr.indexOf(
-                states_list[i].getAttribute("data-value")
-            );
-            print_city(cities_list[i], state_index);
-        } else {
-            // print city for the first state
-            print_city(cities_list[i], 0);
-        }
-    }
-
-    $(".state_inputs").change(function () {
-        let index = $(".state_inputs").index(this);
+    $("select[name='permanent_state']").change(function () {
+        let index = 0;
         let city_index = $(this).val();
-        // find the index of the selected state
         let state_index = state_arr.indexOf(city_index);
         print_city(cities_list[index], state_index);
     });
+
+    $("select[name='communication_state']").change(function () {
+        let index = 1;
+        let city_index = $(this).val();
+        let state_index = state_arr.indexOf(city_index);
+        print_city(cities_list[index], state_index);
+    });
+
+    // Reverse the above opertaton
 
     $("#same_address").change(function () {
         if (this.checked) {
@@ -194,7 +198,6 @@ $(document).ready(function () {
             $("input[name='communication_postal_code']").val(
                 $("input[name='permanent_postal_code']").val()
             );
-            console.log("checked", $("select[name='permanent_city']").val());
         } else {
             $("input[name='communication_street_address1']").val("");
             $("input[name='communication_street_address2']").val("");

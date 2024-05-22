@@ -18,7 +18,7 @@ class ApplicationPolicy
      */
     public function viewAny(User $user)
     {
-        //
+        return $user->role === 'admin';
     }
 
     /**
@@ -30,7 +30,7 @@ class ApplicationPolicy
      */
     public function view(User $user, Application $application)
     {
-        //
+        return $user->role === 'admin' || $user->id == $application->user_id;
     }
 
     /**
@@ -39,8 +39,13 @@ class ApplicationPolicy
      * @param  \App\Models\User  $user
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function create(User $user)
+    public function create(User $user, Application $application)
     {
+        if ($user->role == 'admin') {
+            return true;
+        } else {
+            return $user->id == $application->user_id && $application->status == 'pending';
+        }
     }
 
     /**

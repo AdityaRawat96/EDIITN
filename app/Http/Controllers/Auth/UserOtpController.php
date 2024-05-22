@@ -237,12 +237,12 @@ class UserOtpController extends Controller
 
             // Your 2Factor.in API key
             $apiKey = env("2FA_SECRET"); // Replace with your actual API key
-            $endpoint = "https://2factor.in/API/V1/$apiKey/SMS/:phone_number/:otp/:otp_template_name";
+            $endpoint = "https://2factor.in/API/V1/$apiKey/SMS/:phone_number/:otp/:template_name";
 
             // Replace placeholders in the endpoint with actual values
             $endpoint = str_replace(':phone_number', $mobile, $endpoint);
             $endpoint = str_replace(':otp', $otp, $endpoint);
-            $endpoint = str_replace(':otp_template_name', $otpTemplateName, $endpoint);
+            $endpoint = str_replace(':template_name', $otpTemplateName, $endpoint);
 
             // Send OTP via SMS using cURL
             $curl = curl_init();
@@ -275,14 +275,16 @@ class UserOtpController extends Controller
                 return [
                     'status' => 'error',
                     'message' => 'Failed to send OTP',
-                    'data' => $response,
+                    'data' => [
+                        'response' => $response,
+                    ]
                 ];
             }
         } catch (\Exception $e) {
             return [
                 'status' => 'error',
                 'message' => 'Failed to send OTP',
-                'data' => $e->getMessage(),
+                'error' => $e->getMessage(),
             ];
         }
     }
@@ -295,8 +297,8 @@ class UserOtpController extends Controller
             'last_name' => ['required', 'string', 'max:255'],
             'phone' => ['string', 'max:20'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'permanent_state' => ['string', 'max:255'],
-            'permanent_city' => ['string', 'max:255'],
+            'communication_state' => ['string', 'max:255'],
+            'communication_city' => ['string', 'max:255'],
             'field' => ['required', 'string', 'max:200'],
             'otp' => ['required', 'string', 'max:6'],
         ]);
@@ -339,9 +341,9 @@ class UserOtpController extends Controller
         $application = Application::create([
             'user_id' => $user->id,
             'app_no' => time(),
-            'permanent_state' => $request->permanent_state,
-            'permanent_city' => $request->permanent_city,
-            'field' => $request->field,
+            'communication_state' => $request->permanent_state,
+            'communication_city' => $request->permanent_city,
+            'program' => $request->field,
         ]);
 
         if ($user && $application) {

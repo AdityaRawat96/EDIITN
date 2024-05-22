@@ -9,7 +9,7 @@ var RevenueChart = (function () {
                         series: [
                             {
                                 name: "Amount",
-                                data: REVENUE_DATA,
+                                data: STATUS_DATA[1],
                             },
                         ],
                         chart: {
@@ -33,7 +33,7 @@ var RevenueChart = (function () {
                             offsetX: 0,
                             formatter: function (e, t) {
                                 e *= 1;
-                                return "£" + wNumb({ thousand: "," }).to(e);
+                                return wNumb({ thousand: "," }).to(e);
                             },
                             style: {
                                 fontSize: "14px",
@@ -44,10 +44,10 @@ var RevenueChart = (function () {
                         legend: { show: !1 },
                         colors: ["#3E97FF", "#7239EA", "#F1416C"],
                         xaxis: {
-                            categories: ["Invoices", "Refunds", "Commissions"],
+                            categories: STATUS_DATA[0],
                             labels: {
                                 formatter: function (e) {
-                                    return "£" + parseFloat(e).toFixed(2);
+                                    return parseInt(e);
                                 },
                                 style: {
                                     colors: a,
@@ -110,121 +110,121 @@ var RevenueChart = (function () {
     };
 })();
 
-var SalesChart = {
-    init: function () {
-        !(function () {
-            if ("undefined" != typeof am5) {
-                var e = document.getElementById("sales_chart");
-                if (e) {
-                    var t,
-                        a = function () {
-                            (t = am5.Root.new(e)).setThemes([
-                                am5themes_Animated.new(t),
-                            ]);
-                            var a = t.container.children.push(
-                                    am5xy.XYChart.new(t, {
-                                        panX: !1,
-                                        panY: !1,
-                                        layout: t.verticalLayout,
-                                    })
-                                ),
-                                l = (a.get("colors"), SALES_DATA),
-                                r = a.xAxes.push(
-                                    am5xy.CategoryAxis.new(t, {
-                                        categoryField: "month",
-                                        renderer: am5xy.AxisRendererX.new(t, {
-                                            minGridDistance: 30,
-                                        }),
-                                        bullet: function (e, t, a) {
-                                            return am5xy.AxisBullet.new(e, {
-                                                location: 0.5,
-                                                sprite: am5.Picture.new(e, {
-                                                    width: 24,
-                                                    height: 24,
-                                                    centerY: am5.p50,
-                                                    centerX: am5.p50,
-                                                    src: a.dataContext.icon,
-                                                }),
-                                            });
-                                        },
-                                    })
-                                );
-                            r.get("renderer").labels.template.setAll({
-                                paddingTop: 20,
-                                fontWeight: "400",
-                                fontSize: 10,
-                                fill: am5.color(
-                                    KTUtil.getCssVariableValue("--kt-gray-500")
-                                ),
-                            }),
-                                r.get("renderer").grid.template.setAll({
-                                    disabled: !0,
-                                    strokeOpacity: 0,
-                                }),
-                                r.data.setAll(l);
-                            var o = a.yAxes.push(
-                                am5xy.ValueAxis.new(t, {
-                                    renderer: am5xy.AxisRendererY.new(t, {}),
-                                })
-                            );
-                            o.get("renderer").grid.template.setAll({
-                                stroke: am5.color(
-                                    KTUtil.getCssVariableValue("--kt-gray-300")
-                                ),
-                                strokeWidth: 1,
-                                strokeOpacity: 1,
-                                strokeDasharray: [3],
-                            }),
-                                o.get("renderer").labels.template.setAll({
-                                    fontWeight: "400",
-                                    fontSize: 10,
-                                    fill: am5.color(
-                                        KTUtil.getCssVariableValue(
-                                            "--kt-gray-500"
-                                        )
-                                    ),
-                                });
-                            var i = a.series.push(
-                                am5xy.ColumnSeries.new(t, {
-                                    xAxis: r,
-                                    yAxis: o,
-                                    valueYField: "amount",
-                                    categoryXField: "month",
-                                })
-                            );
-                            i.columns.template.setAll({
-                                tooltipText: "{categoryX}: {valueY}",
-                                tooltipY: 0,
-                                strokeOpacity: 0,
-                                templateField: "columnSettings",
-                            }),
-                                i.columns.template.setAll({
-                                    strokeOpacity: 0,
-                                    cornerRadiusBR: 0,
-                                    cornerRadiusTR: 6,
-                                    cornerRadiusBL: 0,
-                                    cornerRadiusTL: 6,
-                                }),
-                                i.data.setAll(l),
-                                i.appear(),
-                                a.appear(1e3, 100);
-                        };
-                    am5.ready(function () {
-                        a();
-                    }),
-                        KTThemeMode.on("kt.thememode.change", function () {
-                            t.dispose(), a();
-                        });
-                }
-            }
-        })();
-    },
-};
+// var SalesChart = {
+//     init: function () {
+//         !(function () {
+//             if ("undefined" != typeof am5) {
+//                 var e = document.getElementById("sales_chart");
+//                 if (e) {
+//                     var t,
+//                         a = function () {
+//                             (t = am5.Root.new(e)).setThemes([
+//                                 am5themes_Animated.new(t),
+//                             ]);
+//                             var a = t.container.children.push(
+//                                     am5xy.XYChart.new(t, {
+//                                         panX: !1,
+//                                         panY: !1,
+//                                         layout: t.verticalLayout,
+//                                     })
+//                                 ),
+//                                 l = (a.get("colors"), SALES_DATA),
+//                                 r = a.xAxes.push(
+//                                     am5xy.CategoryAxis.new(t, {
+//                                         categoryField: "month",
+//                                         renderer: am5xy.AxisRendererX.new(t, {
+//                                             minGridDistance: 30,
+//                                         }),
+//                                         bullet: function (e, t, a) {
+//                                             return am5xy.AxisBullet.new(e, {
+//                                                 location: 0.5,
+//                                                 sprite: am5.Picture.new(e, {
+//                                                     width: 24,
+//                                                     height: 24,
+//                                                     centerY: am5.p50,
+//                                                     centerX: am5.p50,
+//                                                     src: a.dataContext.icon,
+//                                                 }),
+//                                             });
+//                                         },
+//                                     })
+//                                 );
+//                             r.get("renderer").labels.template.setAll({
+//                                 paddingTop: 20,
+//                                 fontWeight: "400",
+//                                 fontSize: 10,
+//                                 fill: am5.color(
+//                                     KTUtil.getCssVariableValue("--kt-gray-500")
+//                                 ),
+//                             }),
+//                                 r.get("renderer").grid.template.setAll({
+//                                     disabled: !0,
+//                                     strokeOpacity: 0,
+//                                 }),
+//                                 r.data.setAll(l);
+//                             var o = a.yAxes.push(
+//                                 am5xy.ValueAxis.new(t, {
+//                                     renderer: am5xy.AxisRendererY.new(t, {}),
+//                                 })
+//                             );
+//                             o.get("renderer").grid.template.setAll({
+//                                 stroke: am5.color(
+//                                     KTUtil.getCssVariableValue("--kt-gray-300")
+//                                 ),
+//                                 strokeWidth: 1,
+//                                 strokeOpacity: 1,
+//                                 strokeDasharray: [3],
+//                             }),
+//                                 o.get("renderer").labels.template.setAll({
+//                                     fontWeight: "400",
+//                                     fontSize: 10,
+//                                     fill: am5.color(
+//                                         KTUtil.getCssVariableValue(
+//                                             "--kt-gray-500"
+//                                         )
+//                                     ),
+//                                 });
+//                             var i = a.series.push(
+//                                 am5xy.ColumnSeries.new(t, {
+//                                     xAxis: r,
+//                                     yAxis: o,
+//                                     valueYField: "amount",
+//                                     categoryXField: "month",
+//                                 })
+//                             );
+//                             i.columns.template.setAll({
+//                                 tooltipText: "{categoryX}: {valueY}",
+//                                 tooltipY: 0,
+//                                 strokeOpacity: 0,
+//                                 templateField: "columnSettings",
+//                             }),
+//                                 i.columns.template.setAll({
+//                                     strokeOpacity: 0,
+//                                     cornerRadiusBR: 0,
+//                                     cornerRadiusTR: 6,
+//                                     cornerRadiusBL: 0,
+//                                     cornerRadiusTL: 6,
+//                                 }),
+//                                 i.data.setAll(l),
+//                                 i.appear(),
+//                                 a.appear(1e3, 100);
+//                         };
+//                     am5.ready(function () {
+//                         a();
+//                     }),
+//                         KTThemeMode.on("kt.thememode.change", function () {
+//                             t.dispose(), a();
+//                         });
+//                 }
+//             }
+//         })();
+//     },
+// };
 
-var InvoiceChart = (function () {
+var ApplicationChart = (function () {
     var e = { self: null, rendered: !1 },
         t = function (e) {
-            var t = document.getElementById("invoice_chart");
+            var t = document.getElementById("application_chart");
             if (t) {
                 var a = parseInt(KTUtil.css(t, "height")),
                     l = KTUtil.getCssVariableValue("--kt-gray-500"),
@@ -234,7 +234,7 @@ var InvoiceChart = (function () {
                         series: [
                             {
                                 name: "Position",
-                                data: INVOICE_DATA["invoicesTotal"],
+                                data: APPLICATION_DATA["applicationsTotal"],
                             },
                         ],
                         chart: {
@@ -261,7 +261,7 @@ var InvoiceChart = (function () {
                             colors: [o],
                         },
                         xaxis: {
-                            categories: INVOICE_DATA["invoicesDate"],
+                            categories: APPLICATION_DATA["applicationsDate"],
                             axisBorder: { show: !1 },
                             axisTicks: { show: !1 },
                             offsetX: 20,
@@ -284,7 +284,7 @@ var InvoiceChart = (function () {
                         },
                         yaxis: {
                             tickAmount: 4,
-                            max: INVOICE_DATA["invoiceMaxTotal"],
+                            max: APPLICATION_DATA["applicationMaxTotal"],
                             min: 0,
                             labels: {
                                 style: { colors: l, fontSize: "12px" },
@@ -335,6 +335,6 @@ var InvoiceChart = (function () {
 
 KTUtil.onDOMContentLoaded(function () {
     RevenueChart.init();
-    SalesChart.init();
-    InvoiceChart.init();
+    // SalesChart.init();
+    ApplicationChart.init();
 });

@@ -6,10 +6,12 @@ use App\Exports\ApplicationsExport;
 use App\Models\Application;
 use App\Http\Requests\StoreApplicationRequest;
 use App\Http\Requests\UpdateApplicationRequest;
+use App\Models\Attachment;
 use App\Models\User;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 use Maatwebsite\Excel\Facades\Excel;
 use Yajra\DataTables\DataTables;
 
@@ -35,27 +37,40 @@ class ApplicationController extends Controller
             $columns = $request->columns;
 
             // Build an eloquent query using these values
-            $query = Application::select(
-                'id',
-                'name',
-                'status',
-                'description',
-            );
+            $query = Application::join('users', 'applications.user_id', '=', 'users.id')
+                ->select(
+                    'applications.id',
+                    'applications.app_no as app_no',
+                    'applications.communication_state as communication_state',
+                    'applications.status as status',
+                    DB::raw("CONCAT(users.first_name, ' ', users.middle_name, ' ', users.last_name) as name"),
+                    'users.phone as phone',
+                );
+
+            // only if the filter is not empty and exists filter the records
+            if (!empty($request->filter) && isset($request->filter)) {
+                foreach ($request->filter as $filter) {
+                    if ($filter['type'] == 'text') {
+                        $query->where($filter['name'], $filter['comparator'], $filter['value']);
+                    } else if ($filter['type'] == 'date') {
+                        $query->whereDate($filter['name'], $filter['comparator'], $filter['value']);
+                    }
+                }
+            }
 
             // Add the search query trim the search value and check if it is not empty
             if (!empty($search['value'])) {
-                // Loop columns and if they are searchable then add a where clause for first one and orWhere for the rest. if name exists whose values is an array loop that array and add the items to search
-                $column_searched = false;
-                foreach ($columns as $column) {
-                    if ($column['searchable'] == 'true') {
-                        if (!$column_searched) {
-                            $query->where($column['data'], 'like', '%' . $search['value'] . '%');
-                            $column_searched = true;
-                        } else {
-                            $query->orWhere($column['data'], 'like', '%' . $search['value'] . '%');
+                $query->where(function ($query) use ($columns, $search) {
+                    $query->where('users.first_name', 'like', '%' . $search['value'] . '%')
+                        ->orWhere('users.middle_name', 'like', '%' . $search['value'] . '%')
+                        ->orWhere('users.last_name', 'like', '%' . $search['value'] . '%')
+                        ->orWhere('users.phone', 'like', '%' . $search['value'] . '%'); // Add carrier name search
+                    foreach ($columns as $column) {
+                        if ($column['searchable'] == 'true' && $column['data'] != 'name' && $column['data'] != 'phone') {
+                            $query->orWhere("applications." . $column['data'], 'like', '%' . $search['value'] . '%');
                         }
                     }
-                }
+                });
             }
 
             // Add the order by clause if the column is orderable
@@ -79,13 +94,21 @@ class ApplicationController extends Controller
             $datatable = DataTables::of($data_filtered)
                 ->setOffset($start)
                 ->with('recordsTotal', Application::count())
-                ->with('sqlQuery', $query->get())
+                ->with('sqlQuery', $query->toSql()) // Note: It's better to use ->toSql() to get the SQL query for debugging purposes
                 ->with('recordsFiltered', $recordsFiltered)
                 ->addColumn('id', function ($data) {
-                    return str_pad($data->id, 5, '0', STR_PAD_LEFT);
+                    return $data->id;
                 })
                 ->addColumn('status', function ($data) {
-                    return $data->status == 'active' ? '<span class="badge badge-success">Active</span>' : '<span class="badge badge-danger">Inactive</span>';
+                    if ($data->status == 'rejected') {
+                        return '<span class="badge badge-danger">Rejected</span>';
+                    } else if ($data->status == 'approved') {
+                        return '<span class="badge badge-success">Approved</span>';
+                    } else if ($data->status == 'processing') {
+                        return '<span class="badge badge-primary">Processing</span>';
+                    } else if ($data->status == 'pending') {
+                        return '<span class="badge badge-warning">Pending</span>';
+                    }
                 })
                 ->rawColumns(['status'])
                 ->make(true);
@@ -148,8 +171,14 @@ class ApplicationController extends Controller
             // return the customer as json
             return response()->json($application);
         }
+        $user = User::find($application->user_id);
         // return the view for showing the application
-        return view('application.show', compact('application'));
+
+        $photo_attachments = Attachment::where('type', 'photo')->where('ref_id', $application->id)->get();
+        $address_attachments = Attachment::where('type', 'address_proof')->where('ref_id', $application->id)->get();
+        $marksheet_attachments = Attachment::where('type', 'marksheets')->where('ref_id', $application->id)->get();
+
+        return view('application.show', compact('application', 'user', 'photo_attachments', 'address_attachments', 'marksheet_attachments'));
     }
 
     /**
@@ -160,8 +189,7 @@ class ApplicationController extends Controller
      */
     public function edit(Application $application)
     {
-        $user = Auth::user();
-        $this->authorize('update', $user, $application);
+        $this->authorize('update', $application, Application::class);
 
         $user = User::find($application->user_id);
 
@@ -171,8 +199,13 @@ class ApplicationController extends Controller
         $application->email = $user->email;
         $application->phone = $user->phone;
 
+        $photo_attachments = Attachment::where('type', 'photo')->where('ref_id', $application->id)->get();
+        $address_attachments = Attachment::where('type', 'address_proof')->where('ref_id', $application->id)->get();
+        $marksheet_attachments = Attachment::where('type', 'marksheets')->where('ref_id', $application->id)->get();
+
+
         // return the view for editing the application
-        return view('application.create', compact('application'));
+        return view('application.create', compact('application', 'photo_attachments', 'address_attachments', 'marksheet_attachments'));
     }
 
     /**
@@ -187,17 +220,108 @@ class ApplicationController extends Controller
         $this->authorize('update', $application, Application::class);
         // Get the validated data from the request
         $validated = $request->validated();
+        if ($application->status == 'pending') {
+            $validated['status'] = 'processing';
+        }
         try {
             DB::beginTransaction();
             // Update the application in the database
             $application->update($validated);
+            $existing_photo_files = Attachment::where('type', 'photo')->where('ref_id', $application->id)->get();
+            $existing_address_files = Attachment::where('type', 'address')->where('ref_id', $application->id)->get();
+            $existing_marksheet_files = Attachment::where('type', 'marksheets')->where('ref_id', $application->id)->get();
+
+            // Store application attacahments
+            if ($request->hasFile('photo')) {
+                $attachments_created = $this->handleAttachmentReuploads('photo', $request->file('photo'), $existing_photo_files, $application->id);
+                if (count($attachments_created) > 0) {
+                    $photo_url = $attachments_created[0]['url'];
+                    $validated['avatar'] = $photo_url;
+                }
+            } else {
+                // Delete all the files if no file is in the request
+                foreach ($existing_photo_files as $existing_file) {
+                    Storage::disk('public')->delete($existing_file->url);
+                    $existing_file->delete();
+                }
+            }
+
+            if ($request->hasFile('address_proof')) {
+                $this->handleAttachmentReuploads('address_proof', $request->file('address_proof'), $existing_address_files, $application->id);
+            } else {
+                // Delete all the files if no file is in the request
+                foreach ($existing_address_files as $existing_file) {
+                    Storage::disk('public')->delete($existing_file->url);
+                    $existing_file->delete();
+                }
+            }
+
+            if ($request->hasFile('marksheets')) {
+                $this->handleAttachmentReuploads('marksheets', $request->file('marksheets'), $existing_marksheet_files, $application->id);
+            } else {
+                // Delete all the files if no file is in the request
+                foreach ($existing_marksheet_files as $existing_file) {
+                    Storage::disk('public')->delete($existing_file->url);
+                    $existing_file->delete();
+                }
+            }
+
+            // update user details
+            $user = User::find($application->user_id);
+            $user->update([
+                'first_name' => $validated['first_name'],
+                'middle_name' => $validated['middle_name'],
+                'last_name' => $validated['last_name'],
+                'email' => $validated['email'],
+                'avatar' => isset($validated['avatar']) ? $validated['avatar'] : $user->avatar
+            ]);
+
             DB::commit();
-            return response()->json(['message' => 'Application - ' . str_pad($application->id, 5, '0', STR_PAD_LEFT) . ' updated successfully!'], 200);
+            return response()->json(['application_id' => $application->app_no, 'status' => "success"], 200);
         } catch (\Exception $e) {
             DB::rollback();
             return response()->json(['error' => $e->getMessage()], 500);
         }
     }
+
+
+    public function handleAttachmentReuploads($type, $files, $existing_files, $application_id)
+    {
+        $attachments_created = [];
+        // check file by name. if file exists, do not reupload and create an attachment, if the file is not in the request but in db delete the file and attachment
+        foreach ($files as $file) {
+            $existing_file = $existing_files->where('name', $file->getClientOriginalName())->first();
+            if (!$existing_file) {
+                $attachment['type'] = $type;
+                $attachment['ref_id'] = $application_id;
+                $attachment['name'] = $file->getClientOriginalName();
+                $attachment['extension'] = $file->getClientOriginalExtension();
+                $attachment['mime_type'] = $file->getClientMimeType();
+                $attachment['size'] = $file->getSize();
+                $attachment['url'] = $file->store('applications', 'public');
+                Attachment::create($attachment);
+                $attachments_created[] = $attachment;
+            }
+        }
+
+        // Delete the files that are not in the request
+        foreach ($existing_files as $existing_file) {
+            $file_exists = false;
+            foreach ($files as $file) {
+                if ($existing_file->name == $file->getClientOriginalName()) {
+                    $file_exists = true;
+                    break;
+                }
+            }
+            if (!$file_exists) {
+                Storage::disk('public')->delete($existing_file->url);
+                $existing_file->delete();
+            }
+        }
+
+        return $attachments_created;
+    }
+
 
     /**
      * Remove the specified resource from storage.

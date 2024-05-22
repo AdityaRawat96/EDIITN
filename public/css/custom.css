@@ -76,6 +76,11 @@ table .btn-sm {
     margin-top: 5px;
 }
 
+.student_dashboard .card {
+    position: relative;
+    height: 100%;
+}
+
 @media screen and (max-width: 1400px) {
     .card-sticky {
         position: relative;
