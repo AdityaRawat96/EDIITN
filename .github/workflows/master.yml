@@ -9,7 +9,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: 🚚 Get latest code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
 
       - name: Copy .env
         run: php -r "file_exists('.env') || copy('.env.production', '.env');"
@@ -24,7 +24,7 @@ jobs:
         run: chmod -R 775 storage
 
       - name: 📂 Sync files
-        uses: SamKirkland/FTP-Deploy-Action@4.2.0
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
         with:
           server: ftp.clarteresearch.com
           username: ${{ secrets.FTP_USERNAME }}

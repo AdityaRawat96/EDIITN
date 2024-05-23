@@ -1,6 +1,8 @@
 # Global TravelWide - CRM
 
-This is the Admin Dashboard and CRM for the Global TravelWide web application. It is built using PHP Laravel 8.
+This is the Admin Dashboard and CRM for the EDII-TN web application. It is built using PHP Laravel 8.
+
+[<img alt="Deployed with FTP Deploy Action" src="https://img.shields.io/badge/Deployed With-FTP DEPLOY ACTION-%3CCOLOR%3E?style=for-the-badge&color=0077b6">](https://github.com/SamKirkland/FTP-Deploy-Action)
 
 ## Setup
 
@@ -17,10 +19,10 @@ DB_USERNAME=your_username
 DB_PASSWORD=your_password
 ```
 
-2. Run the migration command to create the necessary tables in your database.
+2. Visit the `/clear-cache` route to clear the cache of the application.
 
 ```shell
-php artisan migrate
+http://yourdomain.com/clear-cache
 ```
 
 3. Visit the `/initialize` route in your web browser to seed the database for the admin user.
