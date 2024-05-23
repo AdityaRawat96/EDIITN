@@ -9,14 +9,12 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>EDII-TN</title>
-    <meta name="description"
-        content="Our PG Diploma in Entrepreneurship and innovation is designed to match the needs and requirements of industry and commerce and to fulfill the aspirations of future managers." />
+    <meta name="description" content="Our PG Diploma in Entrepreneurship and innovation is designed to match the needs and requirements of industry and commerce and to fulfill the aspirations of future managers." />
     <link rel="canonical" href="index.php" />
     <meta property="og:locale" content="en_US" />
     <meta property="og:type" content="article" />
     <meta property="og:title" content="index.php" />
-    <meta property="og:description"
-        content="Our PG Diploma in Entrepreneurship and innovation programme is designed to match the needs and requirements of industry and commerce and to fulfill the aspirations of future managers." />
+    <meta property="og:description" content="Our PG Diploma in Entrepreneurship and innovation programme is designed to match the needs and requirements of industry and commerce and to fulfill the aspirations of future managers." />
     <meta property="og:url" content="index.php" />
     <meta property="og:site_name" content="EDII-TN" />
     <meta property="article:publisher" content="" />
@@ -29,9 +27,7 @@
     <link rel="icon" type="image/ico" href="home/images/icon.png" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link
-        href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400..700;1,400..700&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
-        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400..700;1,400..700&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="home/css/bootstrap.min.css">
     <link rel="stylesheet" href="vendor/font-awesome/css/font-awesome.min.css">
     <link rel="stylesheet" href="home/css/slick.css">
@@ -47,11 +43,11 @@
 
 <body>
     <script>
-    var siteUserRole = "{{Auth::user() ? Auth::user()->role : 'student'}}";
-    var siteURL = "{{env('APP_URL')}}";
-    if (document.documentElement) {
-        document.documentElement.setAttribute("data-theme", "light");
-    }
+        var siteUserRole = "{{Auth::user() ? Auth::user()->role : 'student'}}";
+        var siteURL = "{{env('APP_URL')}}";
+        if (document.documentElement) {
+            document.documentElement.setAttribute("data-theme", "light");
+        }
     </script>
     <header class="header shadow shadow-sm">
         <div class="header__top" style="padding-top: 6px;padding-bottom: 6px;">
@@ -67,19 +63,13 @@
                         </div>
                     </div>
                     <div class="col-lg-7">
-                        <div class="header__top--right d-flex justify-content-lg-end justify-content-md-center"
-                            style="padding-top: 5px;">
+                        <div class="header__top--right d-flex justify-content-lg-end justify-content-md-center" style="padding-top: 5px;">
                             <div class="header-social">
-                                <a href="" target="_blank" title="facebook"><i class="fa fa-facebook"
-                                        aria-hidden="true"></i></a>
-                                <a href="" target="_blank" title="twitter"><i class="fa fa-twitter"
-                                        aria-hidden="true"></i></a>
-                                <a href="" title="linkedin" target="_blank"><i class="fa fa-linkedin"
-                                        aria-hidden="true"></i></a>
-                                <a href="" title="instagram" target="_blank"><i class="fa fa-instagram"
-                                        aria-hidden="true"></i></a>
-                                <a href="" title="youtube" target="_blank"><i class="fa fa-youtube"
-                                        aria-hidden="true"></i></a>
+                                <a href="" target="_blank" title="facebook"><i class="fa fa-facebook" aria-hidden="true"></i></a>
+                                <a href="" target="_blank" title="twitter"><i class="fa fa-twitter" aria-hidden="true"></i></a>
+                                <a href="" title="linkedin" target="_blank"><i class="fa fa-linkedin" aria-hidden="true"></i></a>
+                                <a href="" title="instagram" target="_blank"><i class="fa fa-instagram" aria-hidden="true"></i></a>
+                                <a href="" title="youtube" target="_blank"><i class="fa fa-youtube" aria-hidden="true"></i></a>
                             </div>
                             <div class="header__top--links">
                                 <ul class="d-flex justify-content-center list-unstyled m-0 p-0">
@@ -99,9 +89,7 @@
                                 </ul>
                             </div>
                             <div class="">
-                                <a href="javascript:void(0);" id="search-page-mob" data-bs-toggle="modal"
-                                    data-bs-target="#exampleModal"><i class="fa fa-search ms-4" aria-hidden="true"
-                                        style="color: #39c5ff;"></i></a>
+                                <a href="javascript:void(0);" id="search-page-mob" data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="fa fa-search ms-4" aria-hidden="true" style="color: #39c5ff;"></i></a>
                             </div>
                         </div>
                     </div>
@@ -111,10 +99,8 @@
         <div class="header__center">
             <div class="container d-flex align-items-center justify-content-between">
                 <div class="uu-logo">
-                    <a href="/" class="uu-pc-logo"><img src="home/images/logo_2.png" alt="TNEDII" title="TNEDII"
-                            width="460px"></a>
-                    <a href="/" class="d-none uu-pc-logo uu-pc-dark-logo"><img src="home/images/logo_2.png"
-                            title="TNEDII" width="250"></a>
+                    <a href="{{ env('APP_URL') }}" class="uu-pc-logo"><img src="home/images/logo_2.png" alt="TNEDII" title="TNEDII" width="460px"></a>
+                    <a href="{{ env('APP_URL') }}" class="d-none uu-pc-logo uu-pc-dark-logo"><img src="home/images/logo_2.png" title="TNEDII" width="250"></a>
                 </div>
                 <div class="header__center--right d-flex align-items-center justify-content-end">
                     <div class="headerApply d-flex justify-content-center">
@@ -134,8 +120,7 @@
         <div class="header-bottom">
             <nav class="navbar navbar-expand-lg p-0">
                 <div class="container">
-                    <button class="navbar-toggler p-0 border-0" type="button" id="navbarSideCollapse"
-                        aria-label="Toggle navigation">
+                    <button class="navbar-toggler p-0 border-0" type="button" id="navbarSideCollapse" aria-label="Toggle navigation">
                         <span class="navbar-toggler-icon"></span>
                     </button>
                     <div class="navbar-collapse offcanvas-collapse" id="navbarsExampleDefault">
@@ -189,11 +174,9 @@
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <div class="col-lg-4 hide-mob"
-                                                    style="background-color: var(--bg-green);">
+                                                <div class="col-lg-4 hide-mob" style="background-color: var(--bg-green);">
                                                     <div class="ddMenu-numbers">
-                                                        <div class="specialization-thumb br-20 w-100 mb-3"
-                                                            style="background: url('home/images/header-about-img.jpg'); background-size: cover; height: 320px; border-radius: 0;">
+                                                        <div class="specialization-thumb br-20 w-100 mb-3" style="background: url('home/images/header-about-img.jpg'); background-size: cover; height: 320px; border-radius: 0;">
                                                             <div class="specialization-thumb__content">
                                                                 <h3>
                                                                     <div class="sm">Best</div>
@@ -228,28 +211,23 @@
                                                                 <h5>Admissions</h5>
                                                                 <ul class="p-0 m-0 list-unstyled list-icon-2">
                                                                     <li>
-                                                                        <a href="javascript:void(0);"
-                                                                            onclick="scrollToSection('hoa')">How to
+                                                                        <a href="javascript:void(0);" onclick="scrollToSection('hoa')">How to
                                                                             Apply</a>
                                                                     </li>
                                                                     <li>
-                                                                        <a href="javascript:void(0);"
-                                                                            onclick="scrollToSection('hoe')">Admission
+                                                                        <a href="javascript:void(0);" onclick="scrollToSection('hoe')">Admission
                                                                             eligibility</a>
                                                                     </li>
                                                                     <li>
-                                                                        <a href="javascript:void(0);"
-                                                                            onclick="scrollToSection('hoe')">Admission
+                                                                        <a href="javascript:void(0);" onclick="scrollToSection('hoe')">Admission
                                                                             procedure</a>
                                                                     </li>
                                                                     <li>
-                                                                        <a href="javascript:void(0);"
-                                                                            onclick="scrollToSection('hoe')">Program
+                                                                        <a href="javascript:void(0);" onclick="scrollToSection('hoe')">Program
                                                                             Fees Structure</a>
                                                                     </li>
                                                                     <li>
-                                                                        <a href="javascript:void(0);"
-                                                                            onclick="scrollToSection('hoe')">Scholarships</a>
+                                                                        <a href="javascript:void(0);" onclick="scrollToSection('hoe')">Scholarships</a>
                                                                     </li>
                                                                 </ul>
                                                             </div>
@@ -259,8 +237,7 @@
                                                                     <div class="col-lg-6">
                                                                         <ul class="p-0 m-0 list-unstyled list-icon-2">
                                                                             <li>
-                                                                                <a href="javascript:void(0);"
-                                                                                    onclick="scrollToSection('whyedii')">Why
+                                                                                <a href="javascript:void(0);" onclick="scrollToSection('whyedii')">Why
                                                                                     Entrepreneurship</a>
                                                                             </li>
                                                                             <li>
@@ -280,8 +257,7 @@
                             </li>
                             <li class="nav-item dd-menu dd-menu-left position-relative">
                                 <a class="nav-link" href="javascript:void(0)">Program Architecture</a>
-                                <div class="mega-menu mega-menu-sm"
-                                    style="height: 404px; width: 600px; overflow: hidden;">
+                                <div class="mega-menu mega-menu-sm" style="height: 404px; width: 600px; overflow: hidden;">
                                     <div class="menu-programs-list__style">
                                         <div class="row g-0">
                                             <div class="col-lg-6">
@@ -309,8 +285,7 @@
                                                     </ul>
                                                 </div>
                                             </div>
-                                            <div class="col-lg-6 position-relative hide-mob"
-                                                style="background: url('home/images/header-academics-img.jpg'); background-size: cover; height: 405px; background-position: right;">
+                                            <div class="col-lg-6 position-relative hide-mob" style="background: url('home/images/header-academics-img.jpg'); background-size: cover; height: 405px; background-position: right;">
                                                 <div class="acc-list">
                                                     <ul class="list-unstyled p-0 m-0">
                                                         <li>Entrepreneurship Based Best System</li>
@@ -329,8 +304,7 @@
                             </li>
                             @if(Auth::user() && Auth::user()->role == 'student')
                             <div class="headerApply__btn ms-4" style="">
-                                <a href="{{ route('student.dashboard.view') }}"
-                                    class="btn btn-sm btn-primary btn-shadow">
+                                <a href="{{ route('student.dashboard.view') }}" class="btn btn-sm btn-primary btn-shadow">
                                     Dashboard <i class="fa fa-long-arrow-right ms-1" aria-hidden="true"></i></a>
                             </div>
                             @else
@@ -346,8 +320,7 @@
         </div>
         <div class="overlay-bg"></div>
     </header>
-    <section class="programDetailBanner position-relative d-flex align-items-center"
-        style="background: url('home/images/executive-mba.jpg'); background-size: cover;">
+    <section class="programDetailBanner position-relative d-flex align-items-center" style="background: url('home/images/executive-mba.jpg'); background-size: cover;">
         <div class="container">
             <div class="row g-3">
                 <div class="col-lg-8">
@@ -404,8 +377,7 @@
                     </div>
                 </div>
                 <div class="col-lg-4">
-                    <div class="ee-form-widget"
-                        style="box-shadow: 0 .5rem 1rem rgba(0,0,0,.15)!important;border-radius: 7px;">
+                    <div class="ee-form-widget" style="box-shadow: 0 .5rem 1rem rgba(0,0,0,.15)!important;border-radius: 7px;">
                         <h2 style="
                         text-align: center;
                         padding-top: 4%;
@@ -439,8 +411,7 @@
                         font-size: 13px;
                         padding-left: 15px;
                         padding-right: 15px;
-                        "><a href="./management/form/admissions/formenter/entrystart.php"
-                                class="btn btn-lg btn-primary btn-shadow mt-4">Registration Now Open</a></div>
+                        "><a href="./management/form/admissions/formenter/entrystart.php" class="btn btn-lg btn-primary btn-shadow mt-4">Registration Now Open</a></div>
                     </div>
                 </div>
             </div>
@@ -448,9 +419,9 @@
     </section>
     <div class="container" id="whyedii">
         <ol class="breadcrumb m-0 pt-3 pb-1">
-            <li><a href="/"></a></li>
-            <li><a class="bread_crumb" href="/">EDII</a></li>
-            <li><a class="bread_crumb" href="/">Entrepreneurship &
+            <li><a href="{{ env('APP_URL') }}"></a></li>
+            <li><a class="bread_crumb" href="{{ env('APP_URL') }}">EDII</a></li>
+            <li><a class="bread_crumb" href="{{ env('APP_URL') }}">Entrepreneurship &
                     Innovation</a>
             </li>
         </ol>
@@ -537,8 +508,7 @@
                 <div class="col-lg-6">
                     <div class="specialization-slider pagination-style-1">
                         <div class="specialization-slider__item">
-                            <div class="specialization-thumb br-20"
-                                style="background: url('home/images/slide1.jpg'); background-size: cover;">
+                            <div class="specialization-thumb br-20" style="background: url('home/images/slide1.jpg'); background-size: cover;">
                                 <div class="specialization-thumb__content">
                                     <h3>
                                         <div class="sm">Globally</div>
@@ -555,8 +525,7 @@
                             </div>
                         </div>
                         <div class="specialization-slider__item">
-                            <div class="specialization-thumb br-20"
-                                style="background: url('home/images/side2.jpg'); background-size: cover;">
+                            <div class="specialization-thumb br-20" style="background: url('home/images/side2.jpg'); background-size: cover;">
                                 <div class="specialization-thumb__content">
                                     <h3>
                                         <div class="sm">Globally</div>
@@ -596,15 +565,12 @@
             <div class="row">
                 <div class="col-lg-8">
                     <p class="btn btn-sm btn-primary btn-shadow">
-                        <a href=".pdf" target="_blank"
-                            style="border:0px; color:#fff; background:none;text-decoration: none;">Download</a>
+                        <a href=".pdf" target="_blank" style="border:0px; color:#fff; background:none;text-decoration: none;">Download</a>
                     </p>
                     <div class="tabs-style mb-4">
                         <ul class="nav nav-tabs" id="myTab" role="tablist">
                             <li class="nav-item" role="presentation">
-                                <button class="nav-link active" id="home-tab" data-bs-toggle="tab"
-                                    data-bs-target="#home-tab-pane" type="button" role="tab"
-                                    aria-controls="home-tab-pane" aria-selected="true">Fee Structure</button>
+                                <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home-tab-pane" type="button" role="tab" aria-controls="home-tab-pane" aria-selected="true">Fee Structure</button>
                             </li>
                         </ul>
                         <div id="printableArea">
@@ -616,8 +582,7 @@
                             </div>
                             <div class="tab-content" id="myTabContent">
                                 <!-- Regular Fee  -->
-                                <div class="tab-pane fade show active" id="home-tab-pane" role="tabpanel"
-                                    aria-labelledby="home-tab" tabindex="0">
+                                <div class="tab-pane fade show active" id="home-tab-pane" role="tabpanel" aria-labelledby="home-tab" tabindex="0">
                                     <div class="feeTables">
                                         <div class="table-responsive">
                                             <table class="table table-bordered">
@@ -655,8 +620,7 @@
                                     </div>
                                 </div>
                                 <!-- Regular End -->
-                                <div class="tab-pane fade" id="contact-tab-pane" role="tabpanel"
-                                    aria-labelledby="contact-tab" tabindex="0">
+                                <div class="tab-pane fade" id="contact-tab-pane" role="tabpanel" aria-labelledby="contact-tab" tabindex="0">
                                     <div class="feeTables">
                                         <h4>One Time Payable Charges in 1st Semester (INR)</h4>
                                         <div class="table-responsive">
@@ -840,13 +804,11 @@
                     <div class="accordion mb-4" id="accordionExample">
                         <div class="accordion-item">
                             <h2 class="accordion-header" id="headingOne">
-                                <button class="accordion-button" type="button" data-bs-toggle="collapse"
-                                    data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
                                     Semester 1
                                 </button>
                             </h2>
-                            <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne"
-                                data-bs-parent="#accordionExample">
+                            <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
                                 <div class="accordion-body">
                                     <div class="table-responsive">
                                         <table class="table table-bordered">
@@ -906,13 +868,11 @@
                         </div>
                         <div class="accordion-item">
                             <h2 class="accordion-header" id="headingTwo">
-                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                                    data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
                                     Semester 2
                                 </button>
                             </h2>
-                            <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo"
-                                data-bs-parent="#accordionExample">
+                            <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
                                 <div class="accordion-body">
                                     <div class="table-responsive">
                                         <table class="table table-bordered">
@@ -973,14 +933,11 @@
                         <br>
                         <div class="accordion-item">
                             <h2 class="accordion-header" id="headingThree2b">
-                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                                    data-bs-target="#collapseThree2b" aria-expanded="false"
-                                    aria-controls="collapseThree2b">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree2b" aria-expanded="false" aria-controls="collapseThree2b">
                                     services to support start-ups.
                                 </button>
                             </h2>
-                            <div id="collapseThree2b" class="accordion-collapse collapse"
-                                aria-labelledby="headingThree2b" data-bs-parent="#accordionExample2">
+                            <div id="collapseThree2b" class="accordion-collapse collapse" aria-labelledby="headingThree2b" data-bs-parent="#accordionExample2">
                                 <div class="accordion-body">
                                     <div class="table-responsive">
                                         <table class="table table-bordered">
@@ -1045,13 +1002,11 @@
                     </div>
                 </div>
                 <div class="col-lg-4">
-                    <div class="adv-thumb br-20 overflow-hidden"
-                        style="background: url('home/images/adv-thumb-uu.png'); background-size: cover;min-height: 600px !important;">
+                    <div class="adv-thumb br-20 overflow-hidden" style="background: url('home/images/adv-thumb-uu.png'); background-size: cover;min-height: 600px !important;">
                         <div class="adv-thumb__content" style="width: 205px !important;padding: 20px !important;">
                             <h3>Knowledge at Your Fingertips</h3>
                             <p>Apply today at one of the best institute (EDII), India</p>
-                            <a href="" class="btn btn-primary btn-shadow">Know More <i
-                                    class="fa fa-long-arrow-right ms-1" aria-hidden="true"></i></a>
+                            <a href="" class="btn btn-primary btn-shadow">Know More <i class="fa fa-long-arrow-right ms-1" aria-hidden="true"></i></a>
                         </div>
                     </div>
                     <div class="otherlinks br-20 shadow-sm border p-4 mt-4">
@@ -1074,8 +1029,7 @@
             </div>
         </div>
     </section>
-    <section class="bigInfo-section"
-        style="background-image: url('home/images/middle-banner-uu.png'); background-size: cover; background-size: cover; background-repeat: no-repeat;">
+    <section class="bigInfo-section" style="background-image: url('home/images/middle-banner-uu.png'); background-size: cover; background-size: cover; background-repeat: no-repeat;">
         <div class="container">
             <div class="row">
                 <div class="col-lg-6 col-md-8 col-sm-10">
@@ -1137,9 +1091,7 @@
                             <div class="row">
                                 <div class="col-md-4">
                                     <div class="carousel-indicators">
-                                        <button type="button" data-bs-target="#carouselExampleIndicators"
-                                            data-bs-slide-to="0" class="active" aria-current="true"
-                                            aria-label="Slide 1">
+                                        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1">
                                             <div class="step-div d-flex align-items-center">
                                                 <div class="step-div__icon d-flex align-items-center">
                                                     <i class="fa fa-sign-in" aria-hidden="true"></i>
@@ -1150,8 +1102,7 @@
                                                 </div>
                                             </div>
                                         </button>
-                                        <button type="button" data-bs-target="#carouselExampleIndicators"
-                                            data-bs-slide-to="1" aria-label="Slide 2">
+                                        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2">
                                             <div class="step-div d-flex align-items-center">
                                                 <div class="step-div__icon d-flex align-items-center">
                                                     <i class="fa fa-shield" aria-hidden="true"></i>
@@ -1162,8 +1113,7 @@
                                                 </div>
                                             </div>
                                         </button>
-                                        <button type="button" data-bs-target="#carouselExampleIndicators"
-                                            data-bs-slide-to="2" aria-label="Slide 3">
+                                        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3">
                                             <div class="step-div d-flex align-items-center">
                                                 <div class="step-div__icon d-flex align-items-center">
                                                     <i class="fa fa-user" aria-hidden="true"></i>
@@ -1208,8 +1158,7 @@
                     </div>
                 </div>
                 <div class="col-lg-4">
-                    <div class="adv-thumb br-20 overflow-hidden"
-                        style="background: url('home/images/adv-thumb-2.jpg'); background-size: cover;">
+                    <div class="adv-thumb br-20 overflow-hidden" style="background: url('home/images/adv-thumb-2.jpg'); background-size: cover;">
                         <div class="adv-thumb__content">
                             <h3 style="font-size:22px">Development With Internship Outlook</h3>
                             <p style="font-size:15px">Following the first semester, students are exposed to gain
@@ -1223,8 +1172,7 @@
         </div>
     </section>
     <!-- Search Modal -->
-    <div class="modal fade searchModal" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
-        aria-hidden="true">
+    <div class="modal fade searchModal" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg">
             <div class="modal-content red-bg border-0">
                 <div class="modal-header pb-0 border-bottom-0">
@@ -1366,18 +1314,12 @@
                                 </ul>
                                 <div class="footer-social">
                                     <p><span class="text-muted">Get Connected</span></p>
-                                    <a href="/" target="_blank" title="facebook"><i class="fa fa-facebook"
-                                            aria-hidden="true"></i></a>
-                                    <a href="" target="_blank" title="twitter"><i class="fa fa-twitter"
-                                            aria-hidden="true"></i></a>
-                                    <a href="" title="linkedin" target="_blank"><i class="fa fa-linkedin"
-                                            aria-hidden="true"></i></a>
-                                    <a href="" title="instagram" target="_blank"><i class="fa fa-instagram"
-                                            aria-hidden="true"></i></a>
-                                    <a href="" title="youtube" target="_blank"><i class="fa fa-youtube"
-                                            aria-hidden="true"></i></a>
-                                    <a href="" title="GMB" target="_blank"><i class="fa fa-google"
-                                            aria-hidden="true"></i></a>
+                                    <a href="{{ env('APP_URL') }}" target="_blank" title="facebook"><i class="fa fa-facebook" aria-hidden="true"></i></a>
+                                    <a href="" target="_blank" title="twitter"><i class="fa fa-twitter" aria-hidden="true"></i></a>
+                                    <a href="" title="linkedin" target="_blank"><i class="fa fa-linkedin" aria-hidden="true"></i></a>
+                                    <a href="" title="instagram" target="_blank"><i class="fa fa-instagram" aria-hidden="true"></i></a>
+                                    <a href="" title="youtube" target="_blank"><i class="fa fa-youtube" aria-hidden="true"></i></a>
+                                    <a href="" title="GMB" target="_blank"><i class="fa fa-google" aria-hidden="true"></i></a>
                                 </div>
                                 <div class="uu-varification">
                                     <a href="/admit/admit.php" target="_blank">
@@ -1404,8 +1346,7 @@
     </footer>
 
 </body>
-<script src="https://code.jquery.com/jquery-3.7.1.min.js"
-    integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
 <script src="home/js/slider.js"></script>
 <script src="home/js/bootstrap.min.js"></script>
 <script src="home/js/slick.min.js"></script>

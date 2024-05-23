@@ -62,6 +62,12 @@ Route::get('/student/login', function () {
     return view('auth.student.login');
 })->name('student.login');
 
+Route::get('/student', function () {
+    if (Auth::user()->role == "student") {
+        return redirect()->route('student.dashboard.view');
+    }
+})->name('student');
+
 Route::controller(UserOtpController::class)->group(function () {
     Route::post('otp/generate', 'generate')->name('otp.generate');
     Route::post('otp/verify', 'verifyOTP')->name('otp.verify');
@@ -92,7 +98,6 @@ Route::group(['middleware' => ['auth', 'role:admin', 'verified'], 'prefix' => 'a
     Route::resource('user', UserController::class);
     Route::get('user/export/{type}', [UserController::class, 'export'])->name('user.export');
     Route::post('user/updatePassword/{user_id}', [UserController::class, 'updatePassword'])->name('user.updatePassword');
-    Route::post('user/updateAttendance/{user_id}', [AttendanceController::class, 'updateAttendance'])->name('user.updateAttendance');
 
     Route::resource('application', ApplicationController::class);
     Route::put('application/updateStatus/{application_id}', [ApplicationController::class, 'updateStatus'])->name('application.updateStatus');

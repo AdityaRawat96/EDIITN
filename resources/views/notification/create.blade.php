@@ -18,7 +18,7 @@
                 <ul class="breadcrumb breadcrumb-separatorless fw-semibold fs-7 my-0 pt-1">
                     <!--begin::Item-->
                     <li class="breadcrumb-item text-muted">
-                        <a href="/" class="text-primary text-hover-primary">Home</a>
+                        <a href="{{ env('APP_URL') . '/' . Auth::user()->role }}" class="text-primary text-hover-primary">Home</a>
                     </li>
                     <!--end::Item-->
                     <!--begin::Item-->
@@ -59,10 +59,7 @@
                 <!--begin::Content-->
                 <div class="content">
                     <!--begin::Form-->
-                    <form class="form"
-                        action="{{isset($notification) ? route(Auth::user()->role . '.notification.update', $notification->id) : route(Auth::user()->role . '.notification.store')}}"
-                        id="kt_create_form" method="{{isset($notification) ? 'PUT' : 'POST'}}"
-                        enctype="multipart/form-data">
+                    <form class="form" action="{{isset($notification) ? route(Auth::user()->role . '.notification.update', $notification->id) : route(Auth::user()->role . '.notification.store')}}" id="kt_create_form" method="{{isset($notification) ? 'PUT' : 'POST'}}" enctype="multipart/form-data">
                         @csrf
                         <!--begin::Card body-->
                         <div class="card-body border-top p-9">
@@ -73,10 +70,7 @@
                                 <!--end::Label-->
                                 <!--begin::Col-->
                                 <div class="col-lg-8 fv-row">
-                                    <input type="text" name="date" id="notification_date"
-                                        class="form-control form-control-lg form-control-solid mb-3 mb-lg-0"
-                                        placeholder="Pick date"
-                                        value="{{isset($notification->date) ? $notification->date : null}}" />
+                                    <input type="text" name="date" id="notification_date" class="form-control form-control-lg form-control-solid mb-3 mb-lg-0" placeholder="Pick date" value="{{isset($notification->date) ? $notification->date : null}}" />
                                     <div class="fv-plugins-message-container invalid-feedback"></div>
                                 </div>
                                 <!--end::Col-->
@@ -89,10 +83,7 @@
                                 <!--end::Label-->
                                 <!--begin::Col-->
                                 <div class="col-lg-8 fv-row">
-                                    <input type="text" name="title" id="title"
-                                        class="form-control form-control-lg form-control-solid mb-3 mb-lg-0"
-                                        placeholder="Notification title"
-                                        value="{{isset($notification->title) ? $notification->title : null}}" />
+                                    <input type="text" name="title" id="title" class="form-control form-control-lg form-control-solid mb-3 mb-lg-0" placeholder="Notification title" value="{{isset($notification->title) ? $notification->title : null}}" />
                                     <div class="fv-plugins-message-container invalid-feedback"></div>
                                 </div>
                                 <!--end::Col-->
@@ -107,9 +98,7 @@
                                 <!--end::Label-->
                                 <!--begin::Col-->
                                 <div class="col-lg-8 fv-row">
-                                    <textarea name="description" class="form-control form-control-lg form-control-solid"
-                                        rows="3"
-                                        placeholder="Description">{{isset($notification->description) ? $notification->description : null}}</textarea>
+                                    <textarea name="description" class="form-control form-control-lg form-control-solid" rows="3" placeholder="Description">{{isset($notification->description) ? $notification->description : null}}</textarea>
                                 </div>
                                 <!--end::Col-->
                             </div>
@@ -138,8 +127,7 @@
                                             <div class="dropzone-item" style="display:none">
                                                 <!--begin::File-->
                                                 <div class="dropzone-file">
-                                                    <a href="#" class="dropzone-filename d-block"
-                                                        title="some_image_file_name.jpg">
+                                                    <a href="#" class="dropzone-filename d-block" title="some_image_file_name.jpg">
                                                         <span data-dz-name>some_image_file_name.jpg</span>
                                                         <strong>(<span data-dz-size>340kb</span>)</strong>
                                                     </a>
@@ -150,9 +138,7 @@
                                                 <!--begin::Progress-->
                                                 <div class="dropzone-progress">
                                                     <div class="progress">
-                                                        <div class="progress-bar bg-primary" role="progressbar"
-                                                            aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"
-                                                            data-dz-uploadprogress>
+                                                        <div class="progress-bar bg-primary" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" data-dz-uploadprogress>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -160,12 +146,9 @@
 
                                                 <!--begin::Toolbar-->
                                                 <div class="dropzone-toolbar">
-                                                    <span class="dropzone-start"><i
-                                                            class="bi bi-play-fill fs-3"></i></span>
-                                                    <span class="dropzone-cancel" data-dz-remove
-                                                        style="display: none;"><i class="bi bi-x fs-3"></i></span>
-                                                    <span class="dropzone-delete" data-dz-remove><i
-                                                            class="bi bi-x fs-1"></i></span>
+                                                    <span class="dropzone-start"><i class="bi bi-play-fill fs-3"></i></span>
+                                                    <span class="dropzone-cancel" data-dz-remove style="display: none;"><i class="bi bi-x fs-3"></i></span>
+                                                    <span class="dropzone-delete" data-dz-remove><i class="bi bi-x fs-1"></i></span>
                                                 </div>
                                                 <!--end::Toolbar-->
                                             </div>
@@ -187,8 +170,7 @@
                         <!--end::Card body-->
                         <!--begin::Actions-->
                         <div class="card-footer d-flex justify-content-end py-6 px-9">
-                            <button type="reset"
-                                class="reset btn btn-light btn-active-light-primary me-2">Discard</button>
+                            <button type="reset" class="reset btn btn-light btn-active-light-primary me-2">Discard</button>
                             <button type="button" id="kt_form_submit" class="btn btn-primary">
                                 <span class="indicator-label">
                                     {{isset($notification) ? 'Update' : 'Save'}}</span>
@@ -232,29 +214,29 @@ $path = Storage::url($attach->path) . $attach->url;
 ?>
 
 <script>
-$("document").ready(() => {
-    var path = "{{ $path }}";
-    var fileSize = "{$fileSize}}";
-    var file = new File([path], "{{ $attach->name }}", {
-        type: "{{ $attach->mime_type }}",
-        lastModified: "{{ $attach->updated_at }}",
-        size: "{{ $attach->size }}" // Set file size in bytes
+    $("document").ready(() => {
+        var path = "{{ $path }}";
+        var fileSize = "{$fileSize}}";
+        var file = new File([path], "{{ $attach->name }}", {
+            type: "{{ $attach->mime_type }}",
+            lastModified: "{{ $attach->updated_at }}",
+            size: "{{ $attach->size }}" // Set file size in bytes
+        });
+        file['status'] = "added";
+        file['_removeLink'] = "a.dz-remove";
+        file['webkitRelativePath'] = "";
+        file['accepted'] = true;
+        file['dataURL'] = path;
+        file['upload'] = {
+            bytesSent: 0,
+            filename: "{{ $attach->name }}",
+            progress: 100,
+            total: "{{ $attach->size }}", // Set total file size in bytes
+            uuid: "{{ md5($attach->id) }}"
+        };
+        myDropzone.emit("addedfile", file, path);
+        myDropzone.files.push(file);
     });
-    file['status'] = "added";
-    file['_removeLink'] = "a.dz-remove";
-    file['webkitRelativePath'] = "";
-    file['accepted'] = true;
-    file['dataURL'] = path;
-    file['upload'] = {
-        bytesSent: 0,
-        filename: "{{ $attach->name }}",
-        progress: 100,
-        total: "{{ $attach->size }}", // Set total file size in bytes
-        uuid: "{{ md5($attach->id) }}"
-    };
-    myDropzone.emit("addedfile", file, path);
-    myDropzone.files.push(file);
-});
 </script>
 @endforeach
 @endif

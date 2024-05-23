@@ -99,7 +99,7 @@
         <!--begin::Content-->
         <div class="d-flex flex-column flex-center py-7 py-lg-15 px-5 px-md-15 w-100">
             <!--begin::Logo-->
-            <a href="/" class="mb-15">
+            <a href="{{ env('APP_URL') . '/' . Auth::user()->role }}" class="mb-15">
                 <img alt="Logo" src="{{asset('media/logos/logo.png')}}" class="h-60px h-lg-80px" />
             </a>
             <!--end::Logo-->

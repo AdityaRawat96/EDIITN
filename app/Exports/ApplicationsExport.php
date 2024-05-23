@@ -17,12 +17,14 @@ class ApplicationsExport implements FromCollection, WithHeadings, WithStyles, Sh
      */
     public function collection()
     {
-        $applications = Application::select(
-            DB::raw("LPAD(id, 5, '0') as application_id"),
-            'name',
-            'description',
-            'status',
-        )->get();
+        $applications = Application::join('users', 'applications.user_id', '=', 'users.id')
+            ->select(
+                'applications.app_no as app_no',
+                DB::raw("CONCAT(users.first_name, ' ', COALESCE(users.middle_name, ''), ' ', users.last_name) as name"),
+                'users.phone as phone',
+                'applications.communication_state as communication_state',
+                'applications.status as status',
+            )->get();
 
         return $applications;
     }
@@ -32,7 +34,8 @@ class ApplicationsExport implements FromCollection, WithHeadings, WithStyles, Sh
         return [
             'Application ID',
             'Name',
-            'Description',
+            'Phone',
+            'State',
             'Status',
         ];
     }

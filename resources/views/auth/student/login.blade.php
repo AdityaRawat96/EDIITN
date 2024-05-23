@@ -9,14 +9,12 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>EDII-TN</title>
-    <meta name="description"
-        content="Our PG Diploma in Entrepreneurship and innovation is designed to match the needs and requirements of industry and commerce and to fulfill the aspirations of future managers." />
+    <meta name="description" content="Our PG Diploma in Entrepreneurship and innovation is designed to match the needs and requirements of industry and commerce and to fulfill the aspirations of future managers." />
     <link rel="canonical" href="index.php" />
     <meta property="og:locale" content="en_US" />
     <meta property="og:type" content="article" />
     <meta property="og:title" content="index.php" />
-    <meta property="og:description"
-        content="Our PG Diploma in Entrepreneurship and innovation programme is designed to match the needs and requirements of industry and commerce and to fulfill the aspirations of future managers." />
+    <meta property="og:description" content="Our PG Diploma in Entrepreneurship and innovation programme is designed to match the needs and requirements of industry and commerce and to fulfill the aspirations of future managers." />
     <meta property="og:url" content="index.php" />
     <meta property="og:site_name" content="EDII-TN" />
     <meta property="article:publisher" content="" />
@@ -29,9 +27,7 @@
     <link rel="icon" type="image/ico" href="../home/images/icon.png" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link
-        href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400..700;1,400..700&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
-        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400..700;1,400..700&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
 
     <!--begin::Global Stylesheets Bundle(mandatory for all pages)-->
     <link href="{{asset('plugins/global/plugins.bundle.css')}}" rel="stylesheet" type="text/css" />
@@ -57,11 +53,11 @@
 
 <body>
     <script>
-    var siteUserRole = "{{Auth::user() ? Auth::user()->role : 'student'}}";
-    var siteURL = "{{env('APP_URL')}}";
-    if (document.documentElement) {
-        document.documentElement.setAttribute("data-theme", "light");
-    }
+        var siteUserRole = "{{Auth::user() ? Auth::user()->role : 'student'}}";
+        var siteURL = "{{env('APP_URL')}}";
+        if (document.documentElement) {
+            document.documentElement.setAttribute("data-theme", "light");
+        }
     </script>
 
     <header class="header shadow shadow-sm">
@@ -77,19 +73,13 @@
                         </div>
                     </div>
                     <div class="col-lg-7">
-                        <div class="header__top--right d-flex justify-content-lg-end justify-content-md-center"
-                            style="padding-top: 5px;">
+                        <div class="header__top--right d-flex justify-content-lg-end justify-content-md-center" style="padding-top: 5px;">
                             <div class="header-social">
-                                <a href="" target="_blank" title="facebook"><i class="fa fa-facebook"
-                                        aria-hidden="true"></i></a>
-                                <a href="" target="_blank" title="twitter"><i class="fa fa-twitter"
-                                        aria-hidden="true"></i></a>
-                                <a href="" title="linkedin" target="_blank"><i class="fa fa-linkedin"
-                                        aria-hidden="true"></i></a>
-                                <a href="" title="instagram" target="_blank"><i class="fa fa-instagram"
-                                        aria-hidden="true"></i></a>
-                                <a href="" title="youtube" target="_blank"><i class="fa fa-youtube"
-                                        aria-hidden="true"></i></a>
+                                <a href="" target="_blank" title="facebook"><i class="fa fa-facebook" aria-hidden="true"></i></a>
+                                <a href="" target="_blank" title="twitter"><i class="fa fa-twitter" aria-hidden="true"></i></a>
+                                <a href="" title="linkedin" target="_blank"><i class="fa fa-linkedin" aria-hidden="true"></i></a>
+                                <a href="" title="instagram" target="_blank"><i class="fa fa-instagram" aria-hidden="true"></i></a>
+                                <a href="" title="youtube" target="_blank"><i class="fa fa-youtube" aria-hidden="true"></i></a>
                             </div>
                             <div class="header__top--links">
                                 <ul class="d-flex justify-content-center list-unstyled m-0 p-0">
@@ -105,9 +95,7 @@
                                 </ul>
                             </div>
                             <div class="">
-                                <a href="javascript:void(0);" id="search-page-mob" data-bs-toggle="modal"
-                                    data-bs-target="#exampleModal"><i class="fa fa-search ms-4" aria-hidden="true"
-                                        style="color: #39c5ff;"></i></a>
+                                <a href="javascript:void(0);" id="search-page-mob" data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="fa fa-search ms-4" aria-hidden="true" style="color: #39c5ff;"></i></a>
                             </div>
                         </div>
                     </div>
@@ -117,10 +105,8 @@
         <div class="header__center">
             <div class="container d-flex align-items-center justify-content-between">
                 <div class="uu-logo">
-                    <a href="/" class="uu-pc-logo"><img src="../home/images/logo_2.png" alt="TNEDII" title="TNEDII"
-                            width="460px"></a>
-                    <a href="/" class="d-none uu-pc-logo uu-pc-dark-logo"><img src="../home/images/logo_2.png"
-                            title="TNEDII" width="250"></a>
+                    <a href="{{ env('APP_URL') }}" class="uu-pc-logo"><img src="../home/images/logo_2.png" alt="TNEDII" title="TNEDII" width="460px"></a>
+                    <a href="{{ env('APP_URL') }}" class="d-none uu-pc-logo uu-pc-dark-logo"><img src="../home/images/logo_2.png" title="TNEDII" width="250"></a>
                 </div>
                 <div class="header__center--right d-flex align-items-center justify-content-end">
                     <div class="headerApply d-flex justify-content-center">
@@ -139,8 +125,7 @@
         </div>
     </header>
 
-    <section class="admission-banner position-relative"
-        style="background: url('../../home/images/admission-banner.jpg'); background-repeat: no-repeat; background-size: cover; background-position: center;padding-top: 76px">
+    <section class="admission-banner position-relative" style="background: url('../../home/images/admission-banner.jpg'); background-repeat: no-repeat; background-size: cover; background-position: center;padding-top: 76px">
         <div class="container">
             <div class="row">
                 <div class="col-lg-6 position-relative order-2 order-lg-0">
@@ -171,8 +156,7 @@
                                                     <!-- <li>Call Us - <a href="tel:18002124201">18002124201</a></li> -->
                                                 </ul>
                                                 <a href="tel:18002124201" class="stretched-link">Call Us-
-                                                    044-22252081/82 <i class="fa fa-external-link"
-                                                        aria-hidden="true"></i></a>
+                                                    044-22252081/82 <i class="fa fa-external-link" aria-hidden="true"></i></a>
                                             </div>
                                         </div>
                                     </div>
@@ -188,48 +172,36 @@
                                 <h5>TNEDII [PG] Diploma Entrepreneurship Development & Innovation</h5>
                                 <h6>APPLICATION FORM 2024-25</h6>
                             </div>
-                            <div id="error-message2"
-                                style="display: none; color: green; font-size:12px; margin-left: 35px;"></div>
+                            <div id="error-message2" style="display: none; color: green; font-size:12px; margin-left: 35px;"></div>
                             <div class="applyForm__fields p-2">
                                 <div class="form login">
                                     <div class="form-content">
                                         <form id="applicationForm">
                                             <div class="field input-field">
-                                                <input id="userName" type="text" name="name" placeholder="Enter Name *"
-                                                    class="input" required>
+                                                <input id="userName" type="text" name="name" placeholder="Enter Name *" class="input" required>
                                                 <i class="fas fa-user"></i> <!-- Font Awesome user icon -->
                                             </div>
                                             <div class="field input-field">
-                                                <input type="email" name="email" id="emailid"
-                                                    placeholder="Enter Email *" class="input" required>
+                                                <input type="email" name="email" id="emailid" placeholder="Enter Email *" class="input" required>
                                                 <i class="fas fa-envelope"></i> <!-- Font Awesome envelope icon -->
                                             </div>
                                             <div class="field input-field">
-                                                <input type="tel" id="mobileNumber" name="mobile"
-                                                    placeholder="+91 Mobile Number *" class="input">
-                                                <div id="verifyButtonRegister" class="verify-button"
-                                                    onclick="sendOTP()">
+                                                <input type="tel" id="mobileNumber" name="mobile" placeholder="+91 Mobile Number *" class="input">
+                                                <div id="verifyButtonRegister" class="verify-button" onclick="sendOTP()">
                                                     Verify</div>
-                                                <span id="greenTick" class="greenTick"
-                                                    style="color: green; display: none;">&#10004;</span>
+                                                <span id="greenTick" class="greenTick" style="color: green; display: none;">&#10004;</span>
                                                 <i class="fas fa-phone"></i> <!-- Font Awesome phone icon -->
                                             </div>
-                                            <div id="error-message"
-                                                style="display: none; color: red; font-size:10px; margin-left: 30px;">
+                                            <div id="error-message" style="display: none; color: red; font-size:10px; margin-left: 30px;">
                                             </div>
                                             <div id="otpFields" class="otp" style="display: none;">
-                                                <input type="text" id="otp1" maxlength="1" class="otp-input"
-                                                    onkeyup="if (this.value.length === this.maxLength) document.getElementById('otp2').focus()">
-                                                <input type="text" id="otp2" maxlength="1" class="otp-input"
-                                                    onkeyup="if (this.value.length === this.maxLength) document.getElementById('otp3').focus()">
-                                                <input type="text" id="otp3" maxlength="1" class="otp-input"
-                                                    onkeyup="if (this.value.length === this.maxLength) document.getElementById('otp4').focus()">
-                                                <input type="text" id="otp4" maxlength="1" class="otp-input"
-                                                    onkeyup="if (this.value.length === this.maxLength) checkOTP()">
+                                                <input type="text" id="otp1" maxlength="1" class="otp-input" onkeyup="if (this.value.length === this.maxLength) document.getElementById('otp2').focus()">
+                                                <input type="text" id="otp2" maxlength="1" class="otp-input" onkeyup="if (this.value.length === this.maxLength) document.getElementById('otp3').focus()">
+                                                <input type="text" id="otp3" maxlength="1" class="otp-input" onkeyup="if (this.value.length === this.maxLength) document.getElementById('otp4').focus()">
+                                                <input type="text" id="otp4" maxlength="1" class="otp-input" onkeyup="if (this.value.length === this.maxLength) checkOTP()">
                                             </div>
                                             <div class="field input-field samet state-dropdown">
-                                                <select onchange="print_city('state', this.selectedIndex);" id="sts"
-                                                    name="stt" class="form-control" required></select>
+                                                <select onchange="print_city('state', this.selectedIndex);" id="sts" name="stt" class="form-control" required></select>
                                                 <i class="fas fa-map-marker-alt"></i>
                                                 <!-- Font Awesome map marker icon -->
                                             </div>
@@ -238,9 +210,7 @@
                                                 <i class="fas fa-city"></i> <!-- Font Awesome city icon -->
                                             </div>
                                             <div class="field input-field">
-                                                <input id="program_field" type="text" placeholder="Select Program *"
-                                                    name="program" readonly
-                                                    value="PG Dip., Enterprenuership Dev & Innovation" class="input">
+                                                <input id="program_field" type="text" placeholder="Select Program *" name="program" readonly value="PG Dip., Enterprenuership Dev & Innovation" class="input">
                                                 <i class="fas fa-graduation-cap"></i>
                                                 <!-- Font Awesome graduation cap icon -->
                                             </div>
@@ -251,8 +221,7 @@
                                                     <!--end::Indicator label-->
                                                     <!--begin::Indicator progress-->
                                                     <span class="indicator-progress">Please wait...
-                                                        <span
-                                                            class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
+                                                        <span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
                                                     <!--end::Indicator progress-->
                                                 </button>
                                             </div>
@@ -267,27 +236,20 @@
                                     <div class="form-content">
                                         <form id="Loginform">
                                             <div class="field input-field">
-                                                <input type="tel" name="mobile" id="mobileNumberlog"
-                                                    placeholder="+91 Mobile Number *" class="input">
+                                                <input type="tel" name="mobile" id="mobileNumberlog" placeholder="+91 Mobile Number *" class="input">
                                                 <div id="verifyButtonLogin" class="verify-button" onclick="authOTP()">
                                                     Verify
                                                 </div>
-                                                <span id="greenTick" class="greenTick"
-                                                    style="color: green; display: none;">&#10004;</span>
+                                                <span id="greenTick" class="greenTick" style="color: green; display: none;">&#10004;</span>
                                                 <i class="fas fa-phone"></i> <!-- Font Awesome phone icon -->
                                             </div>
-                                            <div id="error-message3"
-                                                style="display: none; color: red; font-size:10px; margin-left: 30px;">
+                                            <div id="error-message3" style="display: none; color: red; font-size:10px; margin-left: 30px;">
                                             </div>
                                             <div id="otpFields1" class="otp" style="display: none;">
-                                                <input type="number" id="otp11" maxlength="1" class="otp-input"
-                                                    onkeyup="if (this.value.length === this.maxLength) document.getElementById('otp12').focus()">
-                                                <input type="number" id="otp12" maxlength="1" class="otp-input"
-                                                    onkeyup="if (this.value.length === this.maxLength) document.getElementById('otp13').focus()">
-                                                <input type="number" id="otp13" maxlength="1" class="otp-input"
-                                                    onkeyup="if (this.value.length === this.maxLength) document.getElementById('otp14').focus()">
-                                                <input type="number" id="otp14" maxlength="1" class="otp-input"
-                                                    onkeyup="if (this.value.length === this.maxLength) verifyOTP()">
+                                                <input type="number" id="otp11" maxlength="1" class="otp-input" onkeyup="if (this.value.length === this.maxLength) document.getElementById('otp12').focus()">
+                                                <input type="number" id="otp12" maxlength="1" class="otp-input" onkeyup="if (this.value.length === this.maxLength) document.getElementById('otp13').focus()">
+                                                <input type="number" id="otp13" maxlength="1" class="otp-input" onkeyup="if (this.value.length === this.maxLength) document.getElementById('otp14').focus()">
+                                                <input type="number" id="otp14" maxlength="1" class="otp-input" onkeyup="if (this.value.length === this.maxLength) verifyOTP()">
                                             </div>
                                             <div class="field button-field">
                                                 <button type="submit" id="kt_sign_in_submit" class="btn btn-nf">
@@ -296,8 +258,7 @@
                                                     <!--end::Indicator label-->
                                                     <!--begin::Indicator progress-->
                                                     <span class="indicator-progress">Please wait...
-                                                        <span
-                                                            class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
+                                                        <span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
                                                     <!--end::Indicator progress-->
                                                 </button>
                                             </div>
@@ -441,18 +402,12 @@
                                 </ul>
                                 <div class="footer-social">
                                     <p><span class="text-muted">Get Connected</span></p>
-                                    <a href="/" target="_blank" title="facebook"><i class="fa fa-facebook"
-                                            aria-hidden="true"></i></a>
-                                    <a href="" target="_blank" title="twitter"><i class="fa fa-twitter"
-                                            aria-hidden="true"></i></a>
-                                    <a href="" title="linkedin" target="_blank"><i class="fa fa-linkedin"
-                                            aria-hidden="true"></i></a>
-                                    <a href="" title="instagram" target="_blank"><i class="fa fa-instagram"
-                                            aria-hidden="true"></i></a>
-                                    <a href="" title="youtube" target="_blank"><i class="fa fa-youtube"
-                                            aria-hidden="true"></i></a>
-                                    <a href="" title="GMB" target="_blank"><i class="fa fa-google"
-                                            aria-hidden="true"></i></a>
+                                    <a href="{{ env('APP_URL') }}" target="_blank" title="facebook"><i class="fa fa-facebook" aria-hidden="true"></i></a>
+                                    <a href="" target="_blank" title="twitter"><i class="fa fa-twitter" aria-hidden="true"></i></a>
+                                    <a href="" title="linkedin" target="_blank"><i class="fa fa-linkedin" aria-hidden="true"></i></a>
+                                    <a href="" title="instagram" target="_blank"><i class="fa fa-instagram" aria-hidden="true"></i></a>
+                                    <a href="" title="youtube" target="_blank"><i class="fa fa-youtube" aria-hidden="true"></i></a>
+                                    <a href="" title="GMB" target="_blank"><i class="fa fa-google" aria-hidden="true"></i></a>
                                 </div>
                                 <div class="uu-varification">
                                     <a href="/admit/admit.php" target="_blank">
@@ -479,8 +434,7 @@
     </footer>
 
 </body>
-<script src="https://code.jquery.com/jquery-3.7.1.min.js"
-    integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
 <script src="../home/js/slider.js"></script>
 <script src="../home/js/bootstrap.min.js"></script>
 <script src="../home/js/slick.min.js"></script>

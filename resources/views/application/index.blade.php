@@ -18,7 +18,7 @@
                 <ul class="breadcrumb breadcrumb-separatorless fw-semibold fs-7 my-0 pt-1">
                     <!--begin::Item-->
                     <li class="breadcrumb-item text-muted">
-                        <a href="/" class="text-primary text-hover-primary">Home</a>
+                        <a href="{{ env('APP_URL') . '/' . Auth::user()->role }}" class="text-primary text-hover-primary">Home</a>
                     </li>
                     <!--end::Item-->
                     <!--begin::Item-->
@@ -99,13 +99,16 @@
                                         <!--begin::Input group-->
                                         <div class="mb-10">
                                             <!--begin::Label-->
-                                            <label class="form-label fw-semibold">Company:</label>
+                                            <label class="form-label fw-semibold">Status:</label>
                                             <!--end::Label-->
                                             <!--begin::Input-->
                                             <div>
-                                                <select class="form-select form-select-solid filter-option" data-kt-select2="true" data-placeholder="Select option" data-filter-type="text" data-filter-target="company_id" data-dropdown-parent="#table_filter" data-allow-clear="true">
+                                                <select class="form-select form-select-solid filter-option" data-kt-select2="true" data-placeholder="Select option" data-filter-type="text" data-filter-target="applications.status" data-dropdown-parent="#table_filter" data-allow-clear="true">
                                                     <option></option>
-
+                                                    <option value="=,pending">Pending</option>
+                                                    <option value="=,processing">Processing</option>
+                                                    <option value="=,approved">Approved</option>
+                                                    <option value="=,rejected">Rejected</option>
                                                 </select>
                                             </div>
                                             <!--end::Input-->
@@ -118,14 +121,6 @@
                                             <!--end::Label-->
                                             <!--begin::Input-->
                                             <div>
-                                                <!-- <select class="form-select form-select-solid filter-option"
-                                                    data-kt-select2="true" data-placeholder="Select option"
-                                                    data-filter-target="application_date" data-filter-type="date"
-                                                    data-dropdown-parent="#table_filter" data-allow-clear="true">
-                                                    <option></option>
-                                                    <option value="<=,{{date('Y-m-d')}}">Past Applications</option>
-                                                    <option value=">,{{date('Y-m-d')}}">Future Applications</option>
-                                                </select> -->
                                                 <input class="form-control form-control-solid datetimepicker-input" placeholder="Pick date range" />
                                             </div>
                                             <!--end::Input-->
@@ -174,11 +169,6 @@
                             </div>
                             <!--end::Menu-->
                             <!--end::Export dropdown-->
-                            <!--begin::Add Record -->
-                            <a href="{{route(Auth::user()->role . '.application.create')}}">
-                                <button type="button" class="btn btn-primary">Add Application</button>
-                            </a>
-                            <!--end::Add Record -->
                         </div>
                         <!--end::Toolbar-->
 

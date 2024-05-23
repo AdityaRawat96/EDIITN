@@ -64,7 +64,7 @@
                                 </div>
                                 <!--end::Heading-->
                                 <!--begin::Description-->
-                                <span class="fs-6 fw-semibold text-gray-400">Revenue this month</span>
+                                <span class="fs-6 fw-semibold text-gray-400">Total Applications</span>
                                 <!--end::Description-->
                             </div>
                             <!--end::Statistics-->
@@ -169,8 +169,8 @@
 
 @section('pagespecificscripts')
 <script>
-var STATUS_DATA = @json($STATUS_DATA);
-var APPLICATION_DATA = @json($APPLICATION_DATA);
+    var STATUS_DATA = @json($STATUS_DATA);
+    var APPLICATION_DATA = @json($APPLICATION_DATA);
 </script>
 <!--begin::Vendors Javascript(used for this page only)-->
 <script src="https://cdn.amcharts.com/lib/5/index.js"></script>

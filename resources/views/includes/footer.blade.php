@@ -8,7 +8,7 @@
                 {{ date('Y') }}
                 &copy;
             </span>
-            <a href="/" target="_blank" class="text-gray-800 text-hover-primary">
+            <a href="{{ env('APP_URL') . '/' . Auth::user()->role }}" target="_blank" class="text-gray-800 text-hover-primary">
                 {{ config('app.name') }}
             </a>
         </div>

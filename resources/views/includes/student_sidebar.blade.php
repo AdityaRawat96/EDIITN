@@ -3,7 +3,7 @@
     <!--begin::Logo-->
     <div class="app-sidebar-logo px-6 bg-white" id="kt_app_sidebar_logo">
         <!--begin::Logo image-->
-        <a href="{{ env('APP_URL') }}">
+        <a href="{{ env('APP_URL') . '/' . Auth::user()->role }}">
             <img alt="Logo" src="{{asset('media/logos/logo.png')}}" class="h-40px app-sidebar-logo-default" />
             <img alt="Logo" src="{{asset('media/logos/logo-min.png')}}" class="h-30px app-sidebar-logo-minimize" />
         </a>

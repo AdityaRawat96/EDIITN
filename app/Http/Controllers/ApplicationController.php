@@ -44,7 +44,7 @@ class ApplicationController extends Controller
                     'applications.app_no as app_no',
                     'applications.communication_state as communication_state',
                     'applications.status as status',
-                    DB::raw("CONCAT(users.first_name, ' ', users.middle_name, ' ', users.last_name) as name"),
+                    DB::raw("CONCAT(users.first_name, ' ', COALESCE(users.middle_name, ''), ' ', users.last_name) as name"),
                     'users.phone as phone',
                 );
 

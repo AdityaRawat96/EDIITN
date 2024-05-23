@@ -42,7 +42,8 @@
                     <div class="col-md-12 col-lg-6">
                         <div class="mb-5">
                             <div class="fw-bold fs-6 text-gray-400">Middle Name</div>
-                            <div class="fs-5 text-gray-800">{{ucfirst($user->middle_name)}}</div>
+                            <div class="fs-5 text-gray-800">
+                                {{isset($user->middle_name) ? ucfirst($user->middle_name) : "-"}}</div>
                         </div>
                         <div class="mb-5">
                             <div class="fw-bold fs-6 text-gray-400">Email</div>
@@ -169,7 +170,9 @@
                         <div class="mb-5">
                             <div class="fw-bold fs-6 text-gray-400">Father's / Guardian's Annual Income
                             </div>
-                            <div class="fs-5 text-gray-800">{{$application->fathers_annual_income}}</div>
+                            <div class="fs-5 text-gray-800">
+                                {{isset($application->fathers_annual_income) ? $application->fathers_annual_income : "-"}}
+                            </div>
                         </div>
                         <div class="mb-5">
                             <div class="fw-bold fs-6 text-gray-400">Father's / Guardian's Mobile Number
@@ -184,17 +187,22 @@
                         </div>
                         <div class="mb-5">
                             <div class="fw-bold fs-6 text-gray-400">Mother / Guardian's Occupation</div>
-                            <div class="fs-5 text-gray-800">{{$application->mother_occupation}}</div>
+                            <div class="fs-5 text-gray-800">
+                                {{isset($application->mother_occupation) ? $application->mother_occupation : "-"}}</div>
                         </div>
                         <div class="mb-5">
                             <div class="fw-bold fs-6 text-gray-400">Mother's / Guardian's Annual Income
                             </div>
-                            <div class="fs-5 text-gray-800">{{$application->mothers_annual_income}}</div>
+                            <div class="fs-5 text-gray-800">
+                                {{isset($application->mothers_annual_income) ? $application->mothers_annual_income : "-"}}
+                            </div>
                         </div>
                         <div class="mb-5">
                             <div class="fw-bold fs-6 text-gray-400">Mother's / Guardian's Mobile Number
                             </div>
-                            <div class="fs-5 text-gray-800">{{$application->mothers_mobile_number}}</div>
+                            <div class="fs-5 text-gray-800">
+                                {{isset($application->mothers_mobile_number) ? $application->mothers_mobile_number : "-"}}
+                            </div>
                         </div>
                     </div>
                 </div>
