@@ -26,10 +26,10 @@ jobs:
       - name: 📂 Sync files
         uses: SamKirkland/FTP-Deploy-Action@4.2.0
         with:
-          server: ftp.betaworx.in
+          server: ftp.clarteresearch.com
           username: ${{ secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWORD }}
-          server-dir: betaworx.in/ediitn_test/
+          server-dir: projects/EDIITN/
           protocol: ftps
           port: 21
           exclude: |

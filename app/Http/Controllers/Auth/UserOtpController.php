@@ -295,72 +295,81 @@ class UserOtpController extends Controller
         $request->validate([
             'first_name' => ['required', 'string', 'max:255'],
             'last_name' => ['required', 'string', 'max:255'],
+            'otp' => ['required', 'string', 'max:6'],
             'phone' => ['string', 'max:20'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'communication_state' => ['string', 'max:255'],
             'communication_city' => ['string', 'max:255'],
             'field' => ['required', 'string', 'max:200'],
-            'otp' => ['required', 'string', 'max:6'],
         ]);
 
-        $user = User::where('phone', $request->phone)->orWhere('email', $request->email)->first();
-        if ($user) {
-            response()->json([
-                'status' => 'error',
-                'message' => 'Phone number or email already exists',
-                'data' => []
+        try {
+
+            $user = User::where('phone', $request->phone)->orWhere('email', $request->email)->first();
+            if ($user) {
+                response()->json([
+                    'status' => 'error',
+                    'message' => 'Phone number or email already exists',
+                    'data' => []
+                ]);
+            }
+
+            /* check if the OTP is correct */
+            $userOTP = UserOtp::where('user_phone', $request->phone)->where('otp', $request->otp)->first();
+            $now = now();
+
+            if (!$userOTP) {
+                return response()->json([
+                    'status' => 'error',
+                    'message' => 'Your OTP is not correct',
+                    'data' => []
+                ]);
+            } else if ($userOTP && $now->isAfter($userOTP->expire_at)) {
+                return response()->json([
+                    'status' => 'error',
+                    'message' => 'Your OTP has been expired',
+                    'data' => []
+                ]);
+            }
+
+            $user = User::create([
+                'first_name' => $request->first_name,
+                'middle_name' => $request->middle_name,
+                'last_name' => $request->last_name,
+                'phone' => $request->phone,
+                'email' => $request->email,
             ]);
-        }
 
-        /* check if the OTP is correct */
-        $userOTP = UserOtp::where('user_phone', $request->phone)->where('otp', $request->otp)->first();
-        $now = now();
-
-        if (!$userOTP) {
-            return response()->json([
-                'status' => 'error',
-                'message' => 'Your OTP is not correct',
-                'data' => []
+            $application = Application::create([
+                'user_id' => $user->id,
+                'app_no' => time(),
+                'communication_state' => $request->permanent_state,
+                'communication_city' => $request->permanent_city,
+                'program' => $request->field,
             ]);
-        } else if ($userOTP && $now->isAfter($userOTP->expire_at)) {
-            return response()->json([
-                'status' => 'error',
-                'message' => 'Your OTP has been expired',
-                'data' => []
-            ]);
-        }
 
-        $user = User::create([
-            'first_name' => $request->first_name,
-            'middle_name' => $request->middle_name,
-            'last_name' => $request->last_name,
-            'phone' => $request->phone,
-            'email' => $request->email,
-        ]);
-
-        $application = Application::create([
-            'user_id' => $user->id,
-            'app_no' => time(),
-            'communication_state' => $request->permanent_state,
-            'communication_city' => $request->permanent_city,
-            'program' => $request->field,
-        ]);
-
-        if ($user && $application) {
-            Auth::login($user);
-            return response()->json([
-                'status' => 'success',
-                'message' => 'User registered successfully',
-                'data' => [
-                    'user' => $user,
-                    'application' => $application
-                ]
-            ]);
-        } else {
+            if ($user && $application) {
+                Auth::login($user);
+                return response()->json([
+                    'status' => 'success',
+                    'message' => 'User registered successfully',
+                    'data' => [
+                        'user' => $user,
+                        'application' => $application
+                    ]
+                ]);
+            } else {
+                return response()->json([
+                    'status' => 'error',
+                    'message' => 'Failed to register user',
+                    'data' => []
+                ]);
+            }
+        } catch (\Exception $e) {
             return response()->json([
                 'status' => 'error',
                 'message' => 'Failed to register user',
-                'data' => []
+                'error' => $e->getMessage(),
             ]);
         }
     }

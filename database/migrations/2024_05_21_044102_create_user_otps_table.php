@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('user_otps', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->constrained('users')->nullable();
+            $table->foreignId('user_id')->constrained('users')->nullable()->default(null);
             $table->string('user_phone')->nullable();
             $table->string('otp');
             $table->timestamp('expire_at')->nullable();

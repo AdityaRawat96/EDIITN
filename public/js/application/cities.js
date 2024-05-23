@@ -163,47 +163,49 @@ $(document).ready(function () {
         print_city(cities_list[i], selectedStateIndex);
     }
 
-    $("select[name='permanent_state']").change(function () {
-        let index = 0;
+    $("select[name='communication_state']").change(function () {
+        let city = document.querySelector("select[name='communication_city']");
         let city_index = $(this).val();
         let state_index = state_arr.indexOf(city_index);
-        print_city(cities_list[index], state_index);
+        print_city(city, state_index);
     });
 
-    $("select[name='communication_state']").change(function () {
-        let index = 1;
+    $("select[name='permanent_state']").change(function () {
+        let city = document.querySelector("select[name='permanent_city']");
         let city_index = $(this).val();
         let state_index = state_arr.indexOf(city_index);
-        print_city(cities_list[index], state_index);
+        print_city(city, state_index);
     });
 
     // Reverse the above opertaton
 
     $("#same_address").change(function () {
         if (this.checked) {
-            $("input[name='communication_street_address1']").val(
-                $("input[name='permanent_street_address1']").val()
+            // If checkbox is checked, copy values from communication to permanent address fields
+            $("input[name='permanent_street_address1']").val(
+                $("input[name='communication_street_address1']").val()
             );
-            $("input[name='communication_street_address2']").val(
-                $("input[name='permanent_street_address2']").val()
+            $("input[name='permanent_street_address2']").val(
+                $("input[name='communication_street_address2']").val()
             );
-            $("select[name='communication_state']")
+            $("select[name='permanent_state']")
                 .select2()
-                .val($("select[name='permanent_state']").val())
+                .val($("select[name='communication_state']").val())
                 .change();
-            $("select[name='communication_city']")
+            $("select[name='permanent_city']")
                 .select2()
-                .val($("select[name='permanent_city']").val())
+                .val($("select[name='communication_city']").val())
                 .change();
-            $("input[name='communication_postal_code']").val(
-                $("input[name='permanent_postal_code']").val()
+            $("input[name='permanent_postal_code']").val(
+                $("input[name='communication_postal_code']").val()
             );
         } else {
-            $("input[name='communication_street_address1']").val("");
-            $("input[name='communication_street_address2']").val("");
-            $("select[name='communication_state']").select2().val("").change();
-            $("select[name='communication_city']").select2().val("").change();
-            $("input[name='communication_postal_code']").val("");
+            // If checkbox is unchecked, clear permanent address fields
+            $("input[name='permanent_street_address1']").val("");
+            $("input[name='permanent_street_address2']").val("");
+            $("select[name='permanent_state']").select2().val("").change();
+            $("select[name='permanent_city']").select2().val("").change();
+            $("input[name='permanent_postal_code']").val("");
         }
     });
 });

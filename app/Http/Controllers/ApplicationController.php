@@ -7,6 +7,7 @@ use App\Models\Application;
 use App\Http\Requests\StoreApplicationRequest;
 use App\Http\Requests\UpdateApplicationRequest;
 use App\Models\Attachment;
+use App\Models\Notification;
 use App\Models\User;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
@@ -178,7 +179,13 @@ class ApplicationController extends Controller
         $address_attachments = Attachment::where('type', 'address_proof')->where('ref_id', $application->id)->get();
         $marksheet_attachments = Attachment::where('type', 'marksheets')->where('ref_id', $application->id)->get();
 
-        return view('application.show', compact('application', 'user', 'photo_attachments', 'address_attachments', 'marksheet_attachments'));
+        $notifications = Notification::where('user_id', $user->id)->get();
+        // Get attachments for each notification
+        foreach ($notifications as $notification) {
+            $notification->attachments = Attachment::where('type', 'notification')->where('ref_id', $notification->id)->get();
+        }
+
+        return view('application.show', compact('application', 'user', 'photo_attachments', 'address_attachments', 'marksheet_attachments', 'notifications'));
     }
 
     /**
@@ -276,6 +283,30 @@ class ApplicationController extends Controller
                 'avatar' => isset($validated['avatar']) ? $validated['avatar'] : $user->avatar
             ]);
 
+            DB::commit();
+            return response()->json(['application_id' => $application->app_no, 'status' => "success"], 200);
+        } catch (\Exception $e) {
+            DB::rollback();
+            return response()->json(['error' => $e->getMessage()], 500);
+        }
+    }
+
+    public function updateStatus(Request $request, $application_id)
+    {
+        // $this->authorize('updateStatus', Auth::user());
+
+        $application = Application::where('id', $application_id)->first();
+        $status = $request->status;
+
+        if ($status == 'approve') {
+            $application->status = 'approved';
+        } else if ($status == 'reject') {
+            $application->status = 'rejected';
+        }
+
+        try {
+            DB::beginTransaction();
+            $application->save();
             DB::commit();
             return response()->json(['application_id' => $application->app_no, 'status' => "success"], 200);
         } catch (\Exception $e) {

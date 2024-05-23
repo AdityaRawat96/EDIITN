@@ -5,6 +5,7 @@ namespace App\Policies;
 use App\Models\Application;
 use App\Models\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
+use Illuminate\Support\Facades\Auth;
 
 class ApplicationPolicy
 {
@@ -62,6 +63,18 @@ class ApplicationPolicy
         } else {
             return $user->id == $application->user_id && $application->status == 'pending';
         }
+    }
+
+    /**
+     * Determine whether the user can update the model.
+     *
+     * @param  \App\Models\User  $user
+     * @param  \App\Models\Application  $application
+     * @return \Illuminate\Auth\Access\Response|bool
+     */
+    public function updateStatus(User $user)
+    {
+        return $user()->role == 'admin';
     }
 
     /**

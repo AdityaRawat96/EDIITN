@@ -3,6 +3,8 @@ var myDropzone_address;
 var myDropzone_marksheets;
 var myDropzone;
 
+let APPLICATION_STATUS = null;
+
 $(document).ready(function () {
     initializePhotoDropZone();
     initializeAddressDropZone();
@@ -19,6 +21,83 @@ $(document).ready(function () {
         // clear form and reset dropzone
         form.trigger("reset");
         myDropzone.removeAllFiles();
+    });
+
+    $(".nav-link-profile-tab").click(function (e) {
+        e.preventDefault();
+        $(".nav-link-profile-tab").removeClass("active");
+        $(this).addClass("active");
+        $(".profile-sections-tab-container").removeClass("active");
+        $($(this).data("target")).addClass("active");
+    });
+
+    $("#update_status_form").on("submit", function (e) {
+        e.preventDefault();
+        var formData = new FormData(this);
+        if ($("#update_status_form").attr("method") == "PUT") {
+            formData.append("_method", "PUT");
+        }
+        formData.append("status", APPLICATION_STATUS);
+
+        $.ajax({
+            url: $("#update_status_form").attr("action"),
+            type: "POST",
+            data: formData,
+            processData: false,
+            contentType: false,
+            cache: false,
+            enctype: "multipart/form-data",
+            success: function (result) {
+                console.log(result);
+                Swal.fire({
+                    text: "Application status updated successfully!",
+                    icon: "success",
+                    buttonsStyling: !1,
+                    confirmButtonText: "Ok, got it!",
+                    customClass: {
+                        confirmButton: "btn btn-primary",
+                    },
+                }).then(function (e) {
+                    e.isConfirmed && window.location.reload();
+                });
+            },
+            error: function (err) {
+                if (err.status == 422) {
+                    console.log(err.responseJSON);
+                    // display errors on each form field
+                    $.each(err.responseJSON.errors, function (i, error) {
+                        var el = $("#kt_create_form [name='" + i + "']");
+                        el.closest(".fv-row")
+                            .find(".fv-plugins-message-container")
+                            .text(error[0]);
+                        el.addClass("is-invalid");
+
+                        // scroll to the error message
+                        KTUtil.scrollTop();
+
+                        Swal.fire({
+                            text: "Sorry, looks like there are some errors detected, please try again.",
+                            icon: "error",
+                            buttonsStyling: !1,
+                            confirmButtonText: "Ok, got it!",
+                            customClass: {
+                                confirmButton: "btn btn-primary",
+                            },
+                        });
+                    });
+                } else {
+                    Swal.fire({
+                        text: "Sorry, looks like there are some errors detected, please try again.",
+                        icon: "error",
+                        buttonsStyling: !1,
+                        confirmButtonText: "Ok, got it!",
+                        customClass: {
+                            confirmButton: "btn btn-primary",
+                        },
+                    });
+                }
+            },
+        });
     });
 });
 
@@ -60,24 +139,10 @@ var handleStatusUpdate = (state, app_no) => {
                 icon: "info",
                 buttonsStyling: false,
                 showConfirmButton: false,
-                timer: 2000,
-            }).then(function () {
-                Swal.fire({
-                    text:
-                        "Application was successfully " +
-                        (state == "approve" ? "approved" : "rejected") +
-                        "!.",
-                    icon: "success",
-                    buttonsStyling: false,
-                    confirmButtonText: "Ok, got it!",
-                    customClass: {
-                        confirmButton: "btn fw-bold btn-primary",
-                    },
-                }).then(function () {
-                    // reload page
-                    location.reload();
-                });
+                timer: 200000,
             });
+            APPLICATION_STATUS = state;
+            $("#update_status_form").submit();
         } else if (result.dismiss === "cancel") {
             Swal.fire({
                 text: "Application status not updated!",

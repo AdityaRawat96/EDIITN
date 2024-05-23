@@ -66,13 +66,13 @@ function handleSubmit(event) {
     formData.append("otp", otp);
     formData.append("phone", mobileNumber);
     formData.append("email", email);
-    formData.append("permanent_state", state);
-    formData.append("permanent_city", city);
+    formData.append("communication_state", state);
+    formData.append("communication_city", city);
     formData.append("field", field);
 
     // Check if the mobile number is verified
     $.ajax({
-        url: `${siteURL}/otp/register`, // PHP script URL
+        url: `${siteURL}/otp/registerWithOTP`, // PHP script URL
         type: "POST",
         // Add lararvel crsf token to the data
         headers: {
@@ -85,7 +85,7 @@ function handleSubmit(event) {
         success: function (response) {
             if (response.status === "success") {
                 // redirect to '/student/dashboard' route
-                window.location.href = "/student/dashboard";
+                window.location.href = `${siteURL}/student/dashboard`;
             } else {
                 document.getElementById("error-message").style.display =
                     "block";
@@ -95,66 +95,15 @@ function handleSubmit(event) {
         },
         error: function (xhr, status, error) {
             // Handle error response
+            registerButton.disabled = false;
             console.error(xhr.responseText);
+            document.getElementById("error-message").style.display = "block";
+            document.getElementById("error-message").textContent =
+                "Verify your phone to proceed.";
         },
     });
 }
 
-// function submitForm() {
-//     const formData = new FormData(registrationForm);
-//     fetch("appform.php", {
-//         method: "POST",
-//         body: formData,
-//     })
-//         .then((response) => {
-//             if (response.ok) {
-//                 console.log("Form data submitted successfully!");
-//                 showLoaderAndRedirect(
-//                     "../../form/admissions/formenter/index.php"
-//                 ); // Show loader then redirect
-//             } else {
-//                 console.error(
-//                     "Error submitting form data:",
-//                     response.statusText
-//                 );
-//                 // You can display an error message to the user
-//             }
-//         })
-//         .catch((error) => {
-//             console.error("Error:", error);
-//             // You can display an error message to the user
-//         });
-// }
-
-// function logForm() {
-//     const formData = new FormData(LoginForm);
-//     fetch("logform.php", {
-//         method: "POST",
-//         body: formData,
-//     })
-//         .then((response) => {
-//             if (response.ok) {
-//                 console.log("login successfully!");
-//                 showLoaderAndRedirect(
-//                     "../../form/admissions/formenter/index.php"
-//                 ); // Show loader then redirect
-//             } else {
-//                 console.error(
-//                     "Error submitting form data:",
-//                     response.statusText
-//                 );
-//                 // You can display an error message to the user
-//             }
-//         })
-//         .catch((error) => {
-//             console.error("Error:", error);
-//             // You can display an error message to the user
-//         });
-// }
-// function showLoaderAndRedirect(targetUrl) {
-//     // Redirect to loader page with target URL as query parameter
-//     window.location.href = `loader.php?target=${encodeURIComponent(targetUrl)}`;
-// }
 // Function to handle login form submission
 function handleSubmit1(event) {
     event.preventDefault(); // Prevent the default form submission
@@ -176,7 +125,7 @@ function handleSubmit1(event) {
 
     // Check if the mobile number is verified
     $.ajax({
-        url: `${siteURL}/otp/login`, // PHP script URL
+        url: `${siteURL}/otp/loginWithOTP`, // PHP script URL
         type: "POST",
         // Add lararvel crsf token to the data
         headers: {
@@ -189,7 +138,7 @@ function handleSubmit1(event) {
         success: function (response) {
             loginButton.disabled = false; // Re-enable the button
             if (response.status === "success") {
-                window.location.href = "/student/dashboard";
+                window.location.href = `${siteURL}/student/dashboard`;
             } else {
                 errorMessage3.style.display = "block";
                 errorMessage3.textContent = response.message;

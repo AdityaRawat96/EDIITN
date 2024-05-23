@@ -64,9 +64,9 @@ Route::get('/student/login', function () {
 Route::controller(UserOtpController::class)->group(function () {
     Route::post('otp/generate', 'generate')->name('otp.generate');
     Route::post('otp/verify', 'verifyOTP')->name('otp.verify');
-    Route::post('otp/register', 'registerWithOTP')->name('otp.register');
+    Route::post('otp/registerWithOTP', 'registerWithOTP')->name('otp.registerWithOTP');
     Route::post('otp/send', 'loginOTP')->name('otp.send');
-    Route::post('otp/login', 'loginWithOtp')->name('otp.login');
+    Route::post('otp/loginWithOTP', 'loginWithOtp')->name('otp.loginWithOTP');
 });
 
 Auth::routes(['verify' => true]);
@@ -94,6 +94,7 @@ Route::group(['middleware' => ['auth', 'role:admin', 'verified'], 'prefix' => 'a
     Route::post('user/updateAttendance/{user_id}', [AttendanceController::class, 'updateAttendance'])->name('user.updateAttendance');
 
     Route::resource('application', ApplicationController::class);
+    Route::put('application/updateStatus/{application_id}', [ApplicationController::class, 'updateStatus'])->name('application.updateStatus');
     Route::get('application/export/{type}', [ApplicationController::class, 'export'])->name('application.export');
 
     Route::resource('notification', NotificationController::class);
