@@ -87,17 +87,56 @@
                         <div class="card-header pt-7">
                             <!--begin::Title-->
                             <h3 class="card-title align-items-start flex-column">
-                                <span class="card-label fw-bold text-dark">Sales (£)</span>
-                                <span class="text-gray-400 pt-2 fw-semibold fs-6">Monthly sales</span>
+                                <span class="card-label fw-bold text-dark">Recent Applications</span>
                             </h3>
                             <!--end::Title-->
                         </div>
                         <!--end::Header-->
                         <!--begin::Body-->
                         <div class="card-body pt-5">
-                            <!--begin::Chart container-->
-                            <div id="sales_chart" class="min-h-auto ps-4 pe-6 mb-3 h-300px"></div>
-                            <!--end::Chart container-->
+                            <div class="table-responsive">
+                                <!--begin::Datatable-->
+                                <table id="kt_datatable" class="table table-striped fs-7 gy-5">
+                                    <thead>
+                                        <tr class="text-start text-gray-500 fw-bold fs-7 text-uppercase gs-0">
+                                            <th class="min-w-125px">Application No.</th>
+                                            <th class="min-w-125px">Name</th>
+                                            <th class="min-w-125px">Phone</th>
+                                            <th class="min-w-85px">Status</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="text-gray-600 fw-semibold">
+                                        @foreach($recent_applications as $application)
+                                        <tr>
+                                            <td>{{$application->app_no}}</td>
+                                            <td>{{$application->name}}</td>
+                                            <td>{{$application->phone}}</td>
+                                            <td>
+                                                @if($application->status == 'pending')
+                                                <span class="badge badge-warning">
+                                                    {{ucfirst($application->status)}}
+                                                </span>
+                                                @elseif($application->status == 'processing')
+                                                <span class="badge badge-primary">
+                                                    {{ucfirst($application->status)}}
+                                                </span>
+                                                @elseif($application->status == 'approved')
+                                                <span class="badge badge-success">
+                                                    {{ucfirst($application->status)}}
+                                                </span>
+                                                @elseif($application->status == 'rejected')
+                                                <span class="badge badge-danger">
+                                                    {{ucfirst($application->status)}}
+                                                </span>
+                                                @endif
+                                            </td>
+                                        </tr>
+                                        @endforeach
+                                    </tbody>
+                                </table>
+                                <!--end::Datatable-->
+                            </div>
+
                         </div>
                         <!--end::Body-->
                     </div>

@@ -296,15 +296,14 @@ class UserOtpController extends Controller
             'first_name' => ['required', 'string', 'max:255'],
             'last_name' => ['required', 'string', 'max:255'],
             'otp' => ['required', 'string', 'max:6'],
-            'phone' => ['string', 'max:20'],
+            'phone' => ['required', 'string', 'max:20'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'communication_state' => ['string', 'max:255'],
-            'communication_city' => ['string', 'max:255'],
+            'communication_state' => ['required', 'string', 'max:255'],
+            'communication_city' => ['required', 'string', 'max:255'],
             'field' => ['required', 'string', 'max:200'],
         ]);
 
         try {
-
             $user = User::where('phone', $request->phone)->orWhere('email', $request->email)->first();
             if ($user) {
                 response()->json([
@@ -343,8 +342,8 @@ class UserOtpController extends Controller
             $application = Application::create([
                 'user_id' => $user->id,
                 'app_no' => time(),
-                'communication_state' => $request->permanent_state,
-                'communication_city' => $request->permanent_city,
+                'communication_state' => $request->communication_state,
+                'communication_city' => $request->communication_city,
                 'program' => $request->field,
             ]);
 

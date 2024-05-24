@@ -46,6 +46,7 @@ class CreateApplicationsTable extends Migration  // Rename this class to a suita
             $table->string('degree_name', 255)->nullable();
             $table->integer('graduation_year')->nullable();
             $table->string('percentage_grade', 100)->nullable();
+            $table->boolean('archived')->default(false);
             $table->timestamps(); // Created_at and updated_at timestamps
         });
     }

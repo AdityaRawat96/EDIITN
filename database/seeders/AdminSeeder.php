@@ -19,6 +19,7 @@ class AdminSeeder extends Seeder
     {
         $user = User::create([
             'role' => 'admin',
+            'privilege' => 'superadmin',
             'first_name' => env('ADMIN_FIRST_NAME'),
             'last_name' => env('ADMIN_LAST_NAME'),
             'phone' => '',

@@ -103,10 +103,21 @@ class DashboardController extends Controller
             'applicationMaxTotal' => $applicationMaxTotal,
         ];
 
+        $RECENT_APPLICATIONS = Application::join('users', 'applications.user_id', '=', 'users.id')
+            ->select(
+                'applications.id',
+                'applications.app_no as app_no',
+                'applications.communication_state as communication_state',
+                'applications.status as status',
+                DB::raw("CONCAT(users.first_name, ' ', COALESCE(users.middle_name, ''), ' ', users.last_name) as name"),
+                'users.phone as phone',
+            )->orderBy('applications.created_at', 'desc')->limit(5)->get();
+
         return view('dashboard.admin.index')->with([
             'STATUS_DATA' => $STATUS_DATA,
             'APPLICATION_DATA' => $APPLICATION_DATA,
             'total_applications' => $applicationTotalSum,
+            'recent_applications' => $RECENT_APPLICATIONS,
         ]);
     }
 

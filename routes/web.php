@@ -11,6 +11,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\NotificationController;
+use App\Http\Controllers\ReportController;
 use Illuminate\Support\Facades\Artisan;
 
 /*
@@ -102,6 +103,10 @@ Route::group(['middleware' => ['auth', 'role:admin', 'verified'], 'prefix' => 'a
     Route::resource('application', ApplicationController::class);
     Route::put('application/updateStatus/{application_id}', [ApplicationController::class, 'updateStatus'])->name('application.updateStatus');
     Route::get('application/export/{type}', [ApplicationController::class, 'export'])->name('application.export');
+
+    Route::resource('report', ReportController::class);
+    Route::post('report/view', [ReportController::class, 'view'])->name('report.view');
+    Route::get('report/export/{type}', [ReportController::class, 'export'])->name('report.export');
 
     Route::resource('notification', NotificationController::class);
     Route::get('notification/export/{type}', [NotificationController::class, 'export'])->name('notification.export');

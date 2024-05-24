@@ -44,9 +44,14 @@ class ApplicationController extends Controller
                     'applications.app_no as app_no',
                     'applications.communication_state as communication_state',
                     'applications.status as status',
+                    'applications.archived as archived',
                     DB::raw("CONCAT(users.first_name, ' ', COALESCE(users.middle_name, ''), ' ', users.last_name) as name"),
                     'users.phone as phone',
                 );
+
+            if (Auth::user()->privilege != 'superadmin') {
+                $query->where('applications.archived', false);
+            }
 
             // only if the filter is not empty and exists filter the records
             if (!empty($request->filter) && isset($request->filter)) {
@@ -55,6 +60,8 @@ class ApplicationController extends Controller
                         $query->where($filter['name'], $filter['comparator'], $filter['value']);
                     } else if ($filter['type'] == 'date') {
                         $query->whereDate($filter['name'], $filter['comparator'], $filter['value']);
+                    } else if ($filter['type'] == 'text-multiple') {
+                        $query->orWhere($filter['name'], $filter['comparator'], $filter['value']);
                     }
                 }
             }
@@ -240,7 +247,7 @@ class ApplicationController extends Controller
 
             // Store application attacahments
             if ($request->hasFile('photo')) {
-                $attachments_created = $this->handleAttachmentReuploads('photo', $request->file('photo'), $existing_photo_files, $application->id);
+                $attachments_created = $this->handleAttachmentReuploads('photo', $request->file('photo'), $existing_photo_files, $application->id, $application->app_no);
                 if (count($attachments_created) > 0) {
                     $photo_url = $attachments_created[0]['url'];
                     $validated['avatar'] = $photo_url;
@@ -254,7 +261,7 @@ class ApplicationController extends Controller
             }
 
             if ($request->hasFile('address_proof')) {
-                $this->handleAttachmentReuploads('address_proof', $request->file('address_proof'), $existing_address_files, $application->id);
+                $this->handleAttachmentReuploads('address_proof', $request->file('address_proof'), $existing_address_files, $application->id, $application->app_no);
             } else {
                 // Delete all the files if no file is in the request
                 foreach ($existing_address_files as $existing_file) {
@@ -264,7 +271,7 @@ class ApplicationController extends Controller
             }
 
             if ($request->hasFile('marksheets')) {
-                $this->handleAttachmentReuploads('marksheets', $request->file('marksheets'), $existing_marksheet_files, $application->id);
+                $this->handleAttachmentReuploads('marksheets', $request->file('marksheets'), $existing_marksheet_files, $application->id, $application->app_no);
             } else {
                 // Delete all the files if no file is in the request
                 foreach ($existing_marksheet_files as $existing_file) {
@@ -304,6 +311,10 @@ class ApplicationController extends Controller
             $application->status = 'rejected';
         }
 
+        if ($request->archived) {
+            $application->archived = $request->archived == 'true' ? true : false;
+        }
+
         try {
             DB::beginTransaction();
             $application->save();
@@ -316,7 +327,7 @@ class ApplicationController extends Controller
     }
 
 
-    public function handleAttachmentReuploads($type, $files, $existing_files, $application_id)
+    public function handleAttachmentReuploads($type, $files, $existing_files, $application_id, $app_no)
     {
         $attachments_created = [];
         // check file by name. if file exists, do not reupload and create an attachment, if the file is not in the request but in db delete the file and attachment
@@ -329,7 +340,7 @@ class ApplicationController extends Controller
                 $attachment['extension'] = $file->getClientOriginalExtension();
                 $attachment['mime_type'] = $file->getClientMimeType();
                 $attachment['size'] = $file->getSize();
-                $attachment['url'] = $file->store('applications', 'public');
+                $attachment['url'] = $file->store('applications/' . $app_no, 'public');
                 Attachment::create($attachment);
                 $attachments_created[] = $attachment;
             }
