@@ -18,7 +18,8 @@
                 <ul class="breadcrumb breadcrumb-separatorless fw-semibold fs-7 my-0 pt-1">
                     <!--begin::Item-->
                     <li class="breadcrumb-item text-muted">
-                        <a href="{{ env('APP_URL') . '/' . Auth::user()->role }}" class="text-primary text-hover-primary">Home</a>
+                        <a href="{{ env('APP_URL') . '/' . Auth::user()->role }}"
+                            class="text-primary text-hover-primary">Home</a>
                     </li>
                     <!--end::Item-->
                     <!--begin::Item-->
@@ -53,7 +54,9 @@
                 <!--end::Card header-->
                 <!--begin::Card body-->
                 <div class="card-body pt-0" id="table_filter">
-                    <form class="mx-auto mw-800px w-100 pt-15 pb-10" novalidate="novalidate" action="{{route('admin.report.view')}}" id="kt_create_report_form" method="POST" enctype="multipart/form-data">
+                    <form class="mx-auto mw-800px w-100 pt-15 pb-10" novalidate="novalidate"
+                        action="{{route('admin.report.view')}}" id="kt_create_report_form" method="POST"
+                        enctype="multipart/form-data">
                         @csrf
 
                         <div class="row">
@@ -65,7 +68,12 @@
                                     <!--end::Label-->
                                     <!--begin::Input-->
                                     <div>
-                                        <select name="status" multiple="multiple" class="form-select form-select-solid filter-option" data-kt-select2="true" data-placeholder="Select option" data-filter-type="text-multiple" data-filter-target="applications.status" data-dropdown-parent="#table_filter" data-allow-clear="true" data-multiple="true">
+                                        <select name="status" multiple="multiple"
+                                            class="form-select form-select-solid filter-option" data-kt-select2="true"
+                                            data-placeholder="Select option" data-filter-type="text-multiple"
+                                            data-filter-target="applications.status"
+                                            data-dropdown-parent="#table_filter" data-allow-clear="true"
+                                            data-multiple="true">
                                             <option></option>
                                             <option value="=,pending">Pending</option>
                                             <option value="=,processing" selected>Processing</option>
@@ -85,7 +93,9 @@
                                     <!--end::Label-->
                                     <!--begin::Input-->
                                     <div>
-                                        <input name="date_range" class="form-control form-control-solid datetimepicker-input" placeholder="Pick date range" />
+                                        <input name="date_range"
+                                            class="form-control form-control-solid datetimepicker-input"
+                                            placeholder="Pick date range" />
                                     </div>
                                     <!--end::Input-->
                                 </div>
@@ -96,7 +106,10 @@
                             <div class="col-md-12 col-lg-6">
                                 <div class="mb-10 fv-row">
                                     <label class="form-label mb-3 ">State</label>
-                                    <select name="communication_state" class="form-select form-select-lg form-select-solid state_inputs filter-option" data-control="select2" data-placeholder="Please Select" data-filter-type="text" data-filter-target="applications.communication_state">
+                                    <select name="communication_state"
+                                        class="form-select form-select-lg form-select-solid state_inputs filter-option"
+                                        data-control="select2" data-placeholder="Please Select" data-filter-type="text"
+                                        data-filter-target="applications.communication_state">
                                     </select>
                                     <div class="fv-plugins-message-container invalid-feedback"></div>
                                 </div>
@@ -105,7 +118,11 @@
                             <div class="col-md-12 col-lg-6">
                                 <div class="mb-10 fv-row">
                                     <label class="form-label mb-3 ">City</label>
-                                    <select name="communication_city" class="form-select form-select-lg form-select-solid city_inputs filter-option" data-control="select2" data-placeholder="Please Select" data-filter-type="text-multiple" data-filter-target="applications.communication_city" multiple>
+                                    <select name="communication_city"
+                                        class="form-select form-select-lg form-select-solid city_inputs filter-option"
+                                        data-control="select2" data-placeholder="Please Select"
+                                        data-filter-type="text-multiple"
+                                        data-filter-target="applications.communication_city" multiple>
                                     </select>
                                     <div class="fv-plugins message-container invalid-feedback"></div>
                                 </div>
@@ -119,7 +136,10 @@
                                     <label class="form-label mb-3 ">Gender</label>
                                     <!--end::Label-->
                                     <!--begin::Input-->
-                                    <select name="gender" class="form-select form-select-lg form-select-solid filter-option" data-control="select2" data-placeholder="Please select" data-filter-type="text" data-filter-target="applications.gender">
+                                    <select name="gender"
+                                        class="form-select form-select-lg form-select-solid filter-option"
+                                        data-control="select2" data-placeholder="Please select" data-filter-type="text"
+                                        data-filter-target="applications.gender">
                                         <option value="">Please select</option>
                                         <option value="=,male">
                                             Male</option>
@@ -140,7 +160,10 @@
                                     <label class="form-label mb-3 ">Caste</label>
                                     <!--end::Label-->
                                     <!--begin::Input-->
-                                    <select name="caste" class="form-select form-select-lg form-select-solid filter-option" data-control="select2" data-placeholder="Please select" data-filter-type="text" data-filter-target="applications.caste">
+                                    <select name="caste"
+                                        class="form-select form-select-lg form-select-solid filter-option"
+                                        data-control="select2" data-placeholder="Please select" data-filter-type="text"
+                                        data-filter-target="applications.caste">
                                         <option value="">Please select</option>
                                         <option value="=,general">
                                             General</option>
@@ -167,7 +190,10 @@
                                     <label class="form-label mb-3 ">Field of Study</label>
                                     <!--end::Label-->
                                     <!--begin::Input-->
-                                    <select name="field" class="form-select form-select-lg form-select-solid filter-option" data-control="select2" data-placeholder="Please select" data-filter-type="text" data-filter-target="applications.field">
+                                    <select name="field"
+                                        class="form-select form-select-lg form-select-solid filter-option"
+                                        data-control="select2" data-placeholder="Please select" data-filter-type="text"
+                                        data-filter-target="applications.field">
                                         <option value="">Please Select</option>
                                         <option value="=,Engineering">
                                             Engineering</option>
@@ -199,11 +225,34 @@
                                 </div>
                                 <!--end::Input group-->
                             </div>
+                            <div class="col-md-12 col-lg-6">
+                                <!--begin::Input group-->
+                                <div class="mb-10 fv-row">
+                                    <!--begin::Label-->
+                                    <label class="form-label mb-3 ">Show archived</label>
+                                    <!--end::Label-->
+                                    <!--begin::Input-->
+                                    <select name="archived"
+                                        class="form-select form-select-lg form-select-solid filter-option"
+                                        data-control="select2" data-placeholder="Please select" data-filter-type="text"
+                                        data-filter-target="applications.archived">
+                                        <option value="=,0" selected>
+                                            No</option>
+                                        <option value="=,1">
+                                            Yes</option>
+                                    </select>
+                                    <div class="fv-plugins-message-container invalid-feedback"></div>
+                                    <!--end::Input-->
+                                </div>
+                                <!--end::Input group-->
+                            </div>
                         </div>
                         <!--begin::Actions-->
                         <div class="d-flex justify-content-end">
-                            <button type="reset" class="btn btn-sm btn-light btn-active-light-primary me-2" data-kt-menu-dismiss="true" id="reset_filter">Reset</button>
-                            <button type="submit" class="btn btn-sm btn-primary" data-kt-menu-dismiss="true" id="apply_filter">Apply</button>
+                            <button type="reset" class="btn btn-sm btn-light btn-active-light-primary me-2"
+                                data-kt-menu-dismiss="true" id="reset_filter">Reset</button>
+                            <button type="submit" class="btn btn-sm btn-primary" data-kt-menu-dismiss="true"
+                                id="apply_filter">Apply</button>
                         </div>
                         <!--end::Actions-->
                     </form>

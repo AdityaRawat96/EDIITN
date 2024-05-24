@@ -49,9 +49,7 @@ class ApplicationController extends Controller
                     'users.phone as phone',
                 );
 
-            if (Auth::user()->privilege != 'superadmin') {
-                $query->where('applications.archived', false);
-            }
+            $query->where('applications.archived', false);
 
             // only if the filter is not empty and exists filter the records
             if (!empty($request->filter) && isset($request->filter)) {
