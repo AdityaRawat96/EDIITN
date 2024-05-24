@@ -51,13 +51,19 @@ class ReportController extends Controller
                 $query->where('applications.archived', false);
             }
 
-
-
             // only if the filter is not empty and exists filter the records
             if (!empty($request->filter) && isset($request->filter)) {
                 foreach ($request->filter as $filter) {
                     if ($filter['type'] == 'text') {
-                        $query->where($filter['name'], $filter['comparator'], $filter['value']);
+                        if ($filter['name'] == 'applications.archived') {
+                            if ($filter['value'] == '1') {
+                                $query->where($filter['name'], true);
+                            } else {
+                                $query->where($filter['name'], false);
+                            }
+                        } else {
+                            $query->where($filter['name'], $filter['comparator'], $filter['value']);
+                        }
                     } else if ($filter['type'] == 'date') {
                         $query->whereDate($filter['name'], $filter['comparator'], $filter['value']);
                     } else if ($filter['type'] == 'text-multiple') {
