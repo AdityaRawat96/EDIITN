@@ -18,7 +18,7 @@ class UserPolicy
     public function viewAny(User $user)
     {
         // only allow the user to view the list of users if they have role of admin
-        return $user->role === 'admin';
+        return $user->role === 'admin' && $user->privilege === 'superadmin';
     }
 
     /**
@@ -31,7 +31,7 @@ class UserPolicy
     public function view(User $user, User $model)
     {
         // only allow the user to view a user if they have role of admin or the user is the same as the authenticated user
-        return $user->role === 'admin' || $user->id === $model->id;
+        return $user->role === 'admin' && $user->privilege === 'superadmin' || $user->id === $model->id;
     }
 
     /**
@@ -43,7 +43,7 @@ class UserPolicy
     public function create(User $user)
     {
         // only allow the user to store a new user if they have role of admin
-        return $user->role === 'admin';
+        return $user->role === 'admin' && $user->privilege === 'superadmin';
     }
 
     /**
@@ -56,7 +56,7 @@ class UserPolicy
     public function update(User $user, User $model)
     {
         // only allow the user to update a user if they have role of admin or the user is the same as the authenticated user
-        return $user->role === 'admin' || $user->id === $model->id;
+        return $user->role === 'admin' && $user->privilege === 'superadmin' || $user->id === $model->id;
     }
 
     /**
@@ -69,7 +69,7 @@ class UserPolicy
     public function delete(User $user)
     {
         // only allow the user to delete a user if they have role of admin 
-        return $user->role === 'admin';
+        return $user->role === 'admin' && $user->privilege === 'superadmin';
     }
 
     /**

@@ -17,15 +17,13 @@ class UsersExport implements FromCollection, WithHeadings, WithStyles, ShouldAut
      */
     public function collection()
     {
-        $app_short_name = env('APP_SHORT', 'TW');
         $users = User::select(
-            DB::raw("CONCAT('" . $app_short_name . "', LPAD(id, 5, '0')) as user_id"),
             DB::raw("CONCAT(first_name, ' ', last_name) as full_name"),
-            'role',
+            'privilege',
             'email',
             'phone',
             'status',
-        )->get();
+        )->where('role', '!=', 'student')->get();
 
         return $users;
     }
@@ -33,9 +31,8 @@ class UsersExport implements FromCollection, WithHeadings, WithStyles, ShouldAut
     public function headings(): array
     {
         return [
-            'User ID',
-            'Full Name',
-            'Role',
+            'Name',
+            'Privilege',
             'Email',
             'Phone',
             'Status',

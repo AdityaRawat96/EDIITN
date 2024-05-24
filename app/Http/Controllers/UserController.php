@@ -8,7 +8,6 @@ use App\Http\Requests\StoreUserRequest;
 use App\Http\Requests\UpdateUserRequest;
 use App\Mail\WelcomeEmail;
 use App\Models\Attachment;
-use App\Models\Attendance;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\Request;
@@ -42,13 +41,14 @@ class UserController extends Controller
             // Build an eloquent query using these values
             $query = User::select(
                 'id',
+                'privilege',
                 'first_name',
                 'last_name',
-                'role',
                 'email',
                 'phone',
-                'status',
-            );
+            )->where('role', '!=', 'student');
+
+            $total_count = $query->count();
 
             // Add the search query trim the search value and check if it is not empty
             if (!empty($search['value'])) {
@@ -66,6 +66,9 @@ class UserController extends Controller
             // Add the order by clause if the column is orderable
             if (!empty($order)) {
                 $column = $columns[$order[0]['column']]['data'];
+                if ($column == 'full_name') {
+                    $column = 'first_name';
+                }
                 $dir = $order[0]['dir'];
                 if ($columns[$order[0]['column']]['orderable'] == 'true') {
                     $query->orderBy($column, $dir);
@@ -83,22 +86,16 @@ class UserController extends Controller
 
             $datatable = DataTables::of($data_filtered)
                 ->setOffset($start)
-                ->with('recordsTotal', User::count())
+                ->with('recordsTotal', $total_count)
                 ->with('sqlQuery', $query->get())
                 ->with('recordsFiltered', $recordsFiltered)
                 ->addColumn('full_name', function ($data) {
                     return $data->first_name . ' ' . $data->last_name;
                 })
-                ->addColumn('id', function ($data) {
-                    return env('APP_SHORT') . str_pad($data->id, 5, '0', STR_PAD_LEFT);
+                ->addColumn('privilege', function ($data) {
+                    return $data->privilege == 'superadmin' ? '<span class="badge badge-warning">Super-Admin</span>' : '<span class="badge badge-primary">Admin</span>';
                 })
-                ->addColumn('role', function ($data) {
-                    return ucfirst($data->role);
-                })
-                ->addColumn('status', function ($data) {
-                    return $data->status == 'active' ? '<span class="badge badge-success">Active</span>' : '<span class="badge badge-danger">Inactive</span>';
-                })
-                ->rawColumns(['status'])
+                ->rawColumns(['privilege'])
                 ->make(true);
             return $datatable;
         }
@@ -140,12 +137,11 @@ class UserController extends Controller
             $password = $this->str_random(12);
             $validated['password'] = bcrypt($password);
             $validated['avatar'] = $avatar_file ?? null;
+            $validated['role'] = 'admin';
 
             // Store the user in the database
             $user = User::create($validated);
 
-            // create a unique username for the user using the id with a prefix TW and padding of 5 zeros
-            $user->username = env('APP_SHORT') . str_pad($user->id, 5, '0', STR_PAD_LEFT);
             $user->save();
             $user->rawPassword = $password;
 
@@ -171,7 +167,7 @@ class UserController extends Controller
             unset($user->rawPassword);
             return response()->json([
                 'user' => $user,
-                'message' => 'User - ' . $user->username . ' created successfully! An email has been sent to the user with the login credentials.'
+                'message' => 'User created successfully! An email has been sent to the user with the login credentials.'
             ], 201);
         } catch (\Exception $e) {
             DB::rollback();
@@ -188,27 +184,9 @@ class UserController extends Controller
     public function show(User $user)
     {
         $this->authorize('view', $user, User::class);
-
-        $attendances = Attendance::where('user_id', $user->id)
-            ->orderBy('date', 'desc')
-            ->get();
-
-        foreach ($attendances as $attendance) {
-            $attendance->title = 'Attendance record for ' . date('d-m-Y', strtotime($attendance->date));
-            $attendance->start = $attendance->date . 'T' . date('H:i:s', strtotime($attendance->in_time));
-            if ($attendance->out_time) {
-                $attendance->end = $attendance->date . 'T' . date('H:i:s', strtotime($attendance->out_time));
-                $attendance->description = 'Duration: ' . $attendance->duration . ' minutes';
-                $attendance->className = 'fc-event-success';
-            } else {
-                $attendance->description = 'Out time not marked yet';
-                $attendance->className = 'fc-event-danger fc-event-solid-warning';
-            }
-            $attendance->location = 'London/UK';
-        }
         $user_attachments = Attachment::where('type', 'user')->where('ref_id', $user->id)->get();
         // return the view for showing the user
-        return view('user.show', compact('user', 'attendances', 'user_attachments'));
+        return view('user.show', compact('user', 'user_attachments'));
     }
 
     /**

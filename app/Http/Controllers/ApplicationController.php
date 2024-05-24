@@ -293,7 +293,7 @@ class ApplicationController extends Controller
 
     public function updateStatus(Request $request, $application_id)
     {
-        // $this->authorize('updateStatus', Auth::user());
+        // $this->authorize('updateStatus', Auth::user(), Application::class);
 
         $application = Application::where('id', $application_id)->first();
         $status = $request->status;
@@ -362,7 +362,7 @@ class ApplicationController extends Controller
      */
     public function destroy(Application $application)
     {
-        $this->authorize('delete', $application, Application::class);
+        $this->authorize('delete', Auth::user(), $application);
         try {
             DB::beginTransaction();
             $application->delete();

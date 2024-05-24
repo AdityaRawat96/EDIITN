@@ -23,12 +23,10 @@ var KTDatatablesServerSide = (function () {
                 url: `${siteURL}/${siteUserRole}/user`,
             },
             columns: [
-                { data: "id" },
                 { data: "full_name" },
-                { data: "role" },
+                { data: "privilege" },
                 { data: "email" },
                 { data: "phone" },
-                { data: "status" },
                 { data: null },
             ],
             columnDefs: [
@@ -56,8 +54,7 @@ var KTDatatablesServerSide = (function () {
                                 <!--begin::Menu item-->
                                 <div class="menu-item px-3">
                                     <a href="${siteURL}/${siteUserRole}/user/${parseInt(
-                            data.id.substring(2),
-                            10
+                            data.id
                         )}" class="menu-link px-3" data-kt-docs-table-filter="view_row">
                                         View
                                     </a>
@@ -66,8 +63,7 @@ var KTDatatablesServerSide = (function () {
                                 <!--begin::Menu item-->
                                 <div class="menu-item px-3">
                                     <a href="${siteURL}/${siteUserRole}/user/${parseInt(
-                            data.id.substring(2),
-                            10
+                            data.id
                         )}/edit" class="menu-link px-3" data-kt-docs-table-filter="edit_row">
                                         Edit
                                     </a>
@@ -76,8 +72,7 @@ var KTDatatablesServerSide = (function () {
                                 <!--begin::Menu item-->
                                 <div class="menu-item px-3">
                                     <a href="${siteURL}/${siteUserRole}/user/${parseInt(
-                            data.id.substring(2),
-                            10
+                            data.id
                         )}" class="menu-link px-3 text-danger" data-kt-docs-table-filter="delete_row">
                                         Delete
                                     </a>

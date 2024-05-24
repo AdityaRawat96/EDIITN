@@ -13,8 +13,8 @@ class StoreUserRequest extends FormRequest
      */
     public function authorize()
     {
-        // only allow the user to store a new user if they have role of admin
-        return $this->user()->role === 'admin';
+        // only allow the user to update a user if they have role of admin and privilege of superadmin
+        return $this->user()->role === 'admin' && $this->user()->privilege === 'superadmin';
     }
 
     /**
@@ -25,7 +25,7 @@ class StoreUserRequest extends FormRequest
     public function rules()
     {
         return [
-            'role' => ['required', 'string', 'max:255'],
+            'privilege' => ['required', 'string', 'max:255'],
             'first_name' => ['required', 'string', 'max:255'],
             'last_name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],

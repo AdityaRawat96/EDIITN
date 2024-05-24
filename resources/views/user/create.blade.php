@@ -113,7 +113,7 @@
                             <!--begin::Input group-->
                             <div class="row mb-6">
                                 <!--begin::Label-->
-                                <label class="col-lg-4 col-form-label required fw-semibold fs-6">Role</label>
+                                <label class="col-lg-4 col-form-label required fw-semibold fs-6">Privilege</label>
                                 <!--end::Label-->
                                 <!--begin::Col-->
                                 <div class="col-lg-8">
@@ -121,14 +121,12 @@
                                     <div class="row">
                                         <!--begin::Col-->
                                         <div class="col-lg-6 fv-row">
-                                            <select name="role" class="form-select form-select-lg form-select-solid" data-control="select2" data-placeholder="Select a role">
-                                                <option value="">Select a role</option>
-                                                <option value="admin" {{isset($user->role) && $user->role == 'admin' ? 'selected' : null}}>
+                                            <select name="privilege" class="form-select form-select-lg form-select-solid" data-control="select2" data-placeholder="Select a privilege">
+                                                <option value="">Select a privilege</option>
+                                                <option value="superadmin" {{isset($user->privilege) && $user->privilege == 'superadmin' ? 'selected' : null}}>
+                                                    Super-Admin</option>
+                                                <option value="admin" {{isset($user->privilege) && $user->privilege == 'admin' ? 'selected' : null}}>
                                                     Admin</option>
-                                                <option value="student" {{isset($user->role) && $user->role == 'student' ? 'selected' : null}}>
-                                                    student</option>
-                                                <option value="other" {{isset($user->role) && $user->role == 'other' ? 'selected' : null}}>
-                                                    Other</option>
                                             </select>
                                             <div class="fv-plugins-message-container invalid-feedback"></div>
                                         </div>

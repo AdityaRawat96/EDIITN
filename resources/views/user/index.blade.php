@@ -128,12 +128,10 @@
                     <table id="kt_datatable" class="table align-middle table-row-dashed fs-6 gy-5">
                         <thead>
                             <tr class="text-start text-gray-500 fw-bold fs-7 text-uppercase gs-0">
-                                <th class="min-w-125px">ID</th>
                                 <th class="min-w-125px">Name</th>
-                                <th class="min-w-125px">Type</th>
+                                <th class="min-w-125px">Privilege</th>
                                 <th class="min-w-125px">Email</th>
                                 <th class="min-w-125px">Phone</th>
-                                <th class="min-w-125px">Status</th>
                                 <th class="text-end min-w-70px">Actions</th>
                             </tr>
                         </thead>

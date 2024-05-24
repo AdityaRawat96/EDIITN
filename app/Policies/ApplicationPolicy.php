@@ -59,7 +59,7 @@ class ApplicationPolicy
     public function update(User $user, Application $application)
     {
         if ($user->role == 'admin') {
-            return true;
+            return $user->privilege == 'superadmin' || $application->status == 'processing';
         } else {
             return $user->id == $application->user_id && $application->status == 'pending';
         }
@@ -72,9 +72,9 @@ class ApplicationPolicy
      * @param  \App\Models\Application  $application
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function updateStatus(User $user)
+    public function updateStatus(User $user, Application $application)
     {
-        return $user()->role == 'admin';
+        return $user()->role == 'admin' && $user->privlege == 'superadmin' || $user->role == 'admin' && $application->status == 'processing';
     }
 
     /**
@@ -86,7 +86,7 @@ class ApplicationPolicy
      */
     public function delete(User $user, Application $application)
     {
-        //
+        $user->role == 'admin' && $user->privlege == 'superadmin';
     }
 
     /**

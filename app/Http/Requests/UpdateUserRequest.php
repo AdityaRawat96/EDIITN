@@ -14,8 +14,8 @@ class UpdateUserRequest extends FormRequest
      */
     public function authorize()
     {
-        // only allow the user to update a user if they have role of admin or the user is the same as the authenticated user
-        return $this->user()->role === 'admin' || $this->user()->id === $this->route('user')->id;
+        // only allow the user to update a user if they have role of admin and privilege of superadmin
+        return $this->user()->role === 'admin' && $this->user()->privilege === 'superadmin';
     }
 
     /**
@@ -26,7 +26,7 @@ class UpdateUserRequest extends FormRequest
     public function rules()
     {
         return [
-            'role' => ['required', 'string', 'max:255'],
+            'privilege' => ['required', 'string', 'max:255'],
             'first_name' => ['required', 'string', 'max:255'],
             'last_name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', Rule::unique('users')->ignore($this->user->id)],
